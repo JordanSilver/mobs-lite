@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.wrap {
+  display: inline-block;
+  position: relative;
+}
+
+#transition {
+  background-color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#hud {
+  display: none;
+}
+
+#attack-interface {
+  background-color: #fff;
+  height: 120px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: #000 solid 4px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+#attack-btn {
+  flex: 0.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#attack-btn button {
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+  color: black;
+  font-size: 14px;
+  cursor: pointer;
+  margin: auto;
+  border: none;
+}
+#attack-btn button:hover {
+  background-color: lightcoral;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+}
+
+#attack-type {
+  flex: 0.4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: #000 solid 4px;
+  font-size: 16px;
+}
+
+#enemy-health {
+  background-color: #fff;
+  width: 250px;
+  border: #000 solid 3px;
+  border-radius: 5px;
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  padding: 0.75rem;
+}
+
+#enemy-health-bar {
+  height: 10px;
+  width: 100%;
+  background-color: lightgrey;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+#enemy-hp {
+  height: 10px;
+  width: 100%;
+  background-color: #0c0;
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+#player-health {
+  background-color: #fff;
+  width: 250px;
+  border: #000 solid 3px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 10rem;
+  right: 2rem;
+  padding: 0.75rem;
+}
+
+#player-health-bar {
+  height: 10px;
+  width: 100%;
+  background-color: lightgrey;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+#player-hp {
+  height: 10px;
+  width: 100%;
+  background-color: #0c0;
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+#que-diag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  display: none;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  #game-btn-x,
+  #game-btn-y {
+    visibility: hidden;
+  }
+}
+
+/* set canvas for mobile viewing */
+@media screen and (max-width: 768px) {
+  #overworld {
+    width: 100%;
+    height: 100%;
+  }
+}

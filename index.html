@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SilverStack.dev</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+      integrity="sha512-Oy+sz5W86PK0ZIkawrG0iv7XwWhYecM3exvUtMKNJMekGFJtVAhibhRPTpmyTj8+lJCkmWfnpxKgT2OopquBHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div id="transition" class="battle-transition"></div>
+      <canvas id="overworld"></canvas>
+      <div id="game-btn">
+        <div
+          id="game-btn-y"
+          style="
+            position: fixed;
+            bottom: 10%;
+            left: 2rem;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 3px 6px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            gap: 1rem;
+          "
+        >
+          <!-- UP -->
+          <div
+            id="game-button-up"
+            style="position: relative; cursor: pointer; color: white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="56"
+              height="56"
+              fill="currentColor"
+              class="bi bi-arrow-up-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"
+              />
+            </svg>
+          </div>
+
+          <!-- game button Down -->
+
+          <div
+            id="game-button-down"
+            style="position: relative; cursor: pointer; color: white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="56"
+              height="56"
+              fill="currentColor"
+              class="bi bi-arrow-down-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          id="game-btn-x"
+          style="
+            position: fixed;
+            bottom: 10%;
+            right: 2rem;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 3px 6px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            gap: 1rem;
+          "
+        >
+          <!-- game button left -->
+          <div
+            id="game-button-left"
+            style="position: relative; cursor: pointer; color: white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="56"
+              height="56"
+              fill="currentColor"
+              class="bi bi-arrow-left-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
+              />
+            </svg>
+          </div>
+
+          <!-- game button right -->
+          <div
+            id="game-button-right"
+            style="position: relative; cursor: pointer; color: white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="56"
+              height="56"
+              fill="currentColor"
+              class="bi bi-arrow-right-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div id="hud">
+        <div id="enemy-health">
+          <h1>Draggle</h1>
+          <div style="position: relative">
+            <div id="enemy-health-bar"></div>
+            <div id="enemy-hp"></div>
+          </div>
+        </div>
+        <div id="player-health">
+          <h1>Emby</h1>
+          <div style="position: relative">
+            <div id="player-health-bar"></div>
+            <div id="player-hp"></div>
+          </div>
+        </div>
+
+        <div id="attack-interface">
+          <div id="que-diag"></div>
+          <div id="attack-btn"></div>
+          <div id="attack-type">
+            <h1>ATTACK TYPE</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+      integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+      integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./js/data/audio.js"></script>
+    <script src="./js/data/collisions.js"></script>
+    <script src="./js/data/battleZones.js"></script>
+    <script src="./js/data/attacks.js"></script>
+    <script src="./js/data/monsters.js"></script>
+    <script src="./js/classes.js"></script>
+    <script src="index.js"></script>
+    <script src="./js/utils.js"></script>
+  </body>
+</html>
