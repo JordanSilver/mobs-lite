@@ -5,10 +5,15 @@ const gameUp = document.querySelector('#game-button-up');
 const gameDown = document.querySelector('#game-button-down');
 const gameLeft = document.querySelector('#game-button-left');
 const gameRight = document.querySelector('#game-button-right');
-
+// find mobile size
+const mobile = window.innerWidth < 600;
 // set size
 canvas.width = 1024;
 canvas.height = 576;
+if (mobile) {
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth / 0.9;
+}
 const offset = {
   x: -300,
   y: -1200,
