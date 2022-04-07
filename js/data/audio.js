@@ -2,7 +2,12 @@ const audio = {
   Map: new Howl({
     src: './audio/map.wav',
     html5: true,
-    volume: 0.5,
+    volume: 0.1,
+  }),
+  House: new Howl({
+    src: './audio/houseMusic.wav',
+    html5: true,
+    volume: 0.2,
   }),
   initBattle: new Howl({
     src: './audio/initBattle.wav',

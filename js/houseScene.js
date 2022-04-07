@@ -108,19 +108,19 @@ function animateHouse() {
         if (keys.s.pressed) {
           window.cancelAnimationFrame(houseAniID);
           audio.tackleHit.play();
-
+          audio.Map.play();
           gsap.to('#transition', {
             opacity: 1,
-            repeat: 3,
+            repeat: 1,
             yoyo: true,
-            duration: 0.4,
+            duration: 0.2,
             onComplete() {
               gsap.to('#transition', {
                 opacity: 1,
                 duration: 0.4,
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
-
+                  audio.House.stop();
                   animate();
                   gsap.to('#transition', {
                     opacity: 0,
