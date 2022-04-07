@@ -1,6 +1,10 @@
 const battleBgImg = new Image();
 battleBgImg.src = './img/battleBackground.png';
 
+// find mobile size
+
+if (mobile) battleBgImg.width = window.innerWidth;
+
 const batttleBg = new Sprite({
   position: {
     x: 0,
