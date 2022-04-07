@@ -297,8 +297,8 @@ function animate() {
             rect1: player,
             rect2: houseZone,
           }) &&
-          overlappingArea > (player.width * player.height) / 2 &&
-          Math.random() < 1
+          overlappingArea > (player.width * player.height) / 2
+          // && Math.random() < 1
         ) {
           // DEACTIVATE CURRENT ANIMATION LOOP
           if (keys.w.pressed && lastKey == 'w') {

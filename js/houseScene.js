@@ -20,7 +20,7 @@ const exitHouseZones = [];
 
 exitHouseMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
-    if (symbol === 482) {
+    if (symbol === 1) {
       exitHouseZones.push(
         new Boundary({
           position: {
@@ -110,6 +110,7 @@ function animateHouse() {
             rect2: houseZone,
           }) &&
           overlappingArea > (player.width * player.height) / 2
+          // && Math.random() < 0.5
         ) {
           // DEACTIVATE CURRENT ANIMATION LOOP
           if (keys.s.pressed && lastKey == 's') {
