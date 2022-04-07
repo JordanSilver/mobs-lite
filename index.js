@@ -45,6 +45,29 @@ battleZonesMap.forEach((row, i) => {
   });
 });
 
+// DRAW ENTER HOUSE BARRIER
+const enterHouseMap = [];
+for (let i = 0; i < enterHouseData.length; i += 70) {
+  enterHouseMap.push(enterHouseData.slice(i, 70 + i));
+}
+
+const houseZones = [];
+
+enterHouseMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 1447) {
+      houseZones.push(
+        new Boundary({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y,
+          },
+        })
+      );
+    }
+  });
+});
+
 // DRAW BORDERS FOR COLLISIONS
 
 const collisionsMap = [];
@@ -136,7 +159,13 @@ const keys = {
 };
 
 const playerSpeed = 6;
-const movables = [overWorld, ...boundaries, overWorldFG, ...battleZones];
+const movables = [
+  overWorld,
+  ...boundaries,
+  overWorldFG,
+  ...battleZones,
+  ...houseZones,
+];
 
 function rectCollision({ rect1, rect2 }) {
   return (
@@ -165,6 +194,10 @@ function animate() {
   // DRAW BATTLE ZONES
   battleZones.forEach((battleZone) => {
     battleZone.draw();
+  });
+  // DRAW ENTER HOUSE ZONE
+  houseZones.forEach((houseZone) => {
+    houseZone.draw();
   });
   // DRAW PLAYER
   player.draw();
@@ -229,6 +262,67 @@ function animate() {
         });
         break;
       }
+    }
+  }
+
+  // // HOUSE ZONE DETECTION & HOUSE ACTIVATION
+  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+    for (let i = 0; i < houseZones.length; i++) {
+      const houseZone = houseZones[i];
+
+      const overlappingArea =
+        (Math.min(
+          player.position.x + player.width,
+          houseZone.position.x + houseZone.width
+        ) -
+          Math.max(player.position.x, houseZone.position.x)) *
+        (Math.min(
+          player.position.y + player.height,
+          houseZone.position.y + houseZone.height
+        ) -
+          Math.max(player.position.y, houseZone.position.y));
+      if (
+        rectCollision({
+          rect1: player,
+          rect2: houseZone,
+        }) &&
+        overlappingArea > (player.width * player.height) / 2 &&
+        // make it random
+        Math.random() < 1
+      )
+        if (
+          rectCollision({
+            rect1: player,
+            rect2: houseZone,
+          }) &&
+          overlappingArea > (player.width * player.height) / 2
+        ) {
+          // DEACTIVATE CURRENT ANIMATION LOOP
+          window.cancelAnimationFrame(animationID);
+          audio.Map.stop();
+          audio.tackleHit.play();
+          gsap.to('#transition', {
+            opacity: 1,
+            repeat: 3,
+            yoyo: true,
+            duration: 0.4,
+            onComplete() {
+              gsap.to('#transition', {
+                opacity: 1,
+                duration: 0.4,
+                onComplete() {
+                  // ACTIVE NEW ANIMATION LOOP
+                  animateHouse();
+                  gsap.to('#transition', {
+                    opacity: 0,
+                    duration: 0.4,
+                  });
+                },
+              });
+            },
+          });
+          break;
+        }
     }
   }
 
