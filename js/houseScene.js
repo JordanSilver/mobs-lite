@@ -125,7 +125,7 @@ function animateHouse() {
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
                   audio.House.stop();
-                  // animate();
+                  animate();
                   gsap.to('#transition', {
                     opacity: 0,
                     duration: 0.4,
