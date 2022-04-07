@@ -168,6 +168,9 @@ body {
 
 /* set canvas for mobile viewing */
 @media screen and (max-width: 768px) {
+  body {
+    height: 90vh;
+  }
   #overworld {
     width: 100%;
     height: 100%;
