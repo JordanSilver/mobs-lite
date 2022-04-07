@@ -8,12 +8,15 @@ const gameRight = document.querySelector('#game-button-right');
 // find mobile size
 const mobile = window.innerWidth < 600;
 // set size
-canvas.width = 1024;
-canvas.height = 576;
+// canvas.width = 1024;
+// canvas.height = 576;
 
 if (mobile) {
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth / 0.9;
+} else {
+  canvas.width = 1024;
+  canvas.height = 576;
 }
 
 const offset = {
