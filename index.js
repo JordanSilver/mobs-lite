@@ -281,46 +281,50 @@ function animate() {
           houseZone.position.y + houseZone.height
         ) -
           Math.max(player.position.y, houseZone.position.y));
+
       if (
         rectCollision({
           rect1: player,
           rect2: houseZone,
         }) &&
-        overlappingArea > (player.width * player.height) / 2 &&
-        // make it random
-        Math.random() < 1
+        overlappingArea > (player.width * player.height) / 2
       )
         if (
           rectCollision({
             rect1: player,
             rect2: houseZone,
           }) &&
-          overlappingArea > (player.width * player.height) / 2
+          overlappingArea > (player.width * player.height) / 2 &&
+          Math.random() < 1
         ) {
           // DEACTIVATE CURRENT ANIMATION LOOP
-          window.cancelAnimationFrame(animationID);
-          audio.Map.stop();
-          audio.tackleHit.play();
-          gsap.to('#transition', {
-            opacity: 1,
-            repeat: 3,
-            yoyo: true,
-            duration: 0.4,
-            onComplete() {
-              gsap.to('#transition', {
-                opacity: 1,
-                duration: 0.4,
-                onComplete() {
-                  // ACTIVE NEW ANIMATION LOOP
-                  animateHouse();
-                  gsap.to('#transition', {
-                    opacity: 0,
-                    duration: 0.4,
-                  });
-                },
-              });
-            },
-          });
+          if (keys.w.pressed && lastKey == 'w') {
+            window.cancelAnimationFrame(animationID);
+            audio.Map.stop();
+            audio.tackleHit.play();
+            gsap.to('#transition', {
+              opacity: 1,
+              repeat: 3,
+              yoyo: true,
+              duration: 0.4,
+              onComplete() {
+                gsap.to('#transition', {
+                  opacity: 1,
+                  duration: 0.4,
+                  onComplete() {
+                    // ACTIVE NEW ANIMATION LOOP
+
+                    animateHouse();
+                    gsap.to('#transition', {
+                      opacity: 0,
+                      duration: 0.4,
+                    });
+                  },
+                });
+              },
+            });
+          }
+
           break;
         }
     }

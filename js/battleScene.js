@@ -116,7 +116,9 @@ function animateBattle() {
   renderedSprites.forEach((sprite) => sprite.draw());
 }
 
+// THIS ANIMATE STARTS THIS GAME \/
 animate();
+
 // initBattle();
 // animateBattle();
 
