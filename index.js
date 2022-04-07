@@ -290,46 +290,38 @@ function animate() {
           rect1: player,
           rect2: houseZone,
         }) &&
-        overlappingArea > (player.width * player.height) / 2
-      )
-        if (
-          rectCollision({
-            rect1: player,
-            rect2: houseZone,
-          }) &&
-          overlappingArea > (player.width * player.height) / 2
-          // && Math.random() < 1
-        ) {
-          // DEACTIVATE CURRENT ANIMATION LOOP
-          if (keys.w.pressed && lastKey == 'w') {
-            window.cancelAnimationFrame(animationID);
-            audio.Map.stop();
-            audio.tackleHit.play();
-            gsap.to('#transition', {
-              opacity: 1,
-              repeat: 3,
-              yoyo: true,
-              duration: 0.4,
-              onComplete() {
-                gsap.to('#transition', {
-                  opacity: 1,
-                  duration: 0.4,
-                  onComplete() {
-                    // ACTIVE NEW ANIMATION LOOP
+        overlappingArea > (player.width * player.height) / 4
+      ) {
+        // DEACTIVATE CURRENT ANIMATION LOOP
+        if (keys.w.pressed) {
+          window.cancelAnimationFrame(animationID);
+          audio.Map.stop();
+          audio.tackleHit.play();
+          gsap.to('#transition', {
+            opacity: 1,
+            repeat: 3,
+            yoyo: true,
+            duration: 0.4,
+            onComplete() {
+              gsap.to('#transition', {
+                opacity: 1,
+                duration: 0.4,
+                onComplete() {
+                  // ACTIVE NEW ANIMATION LOOP
 
-                    animateHouse();
-                    gsap.to('#transition', {
-                      opacity: 0,
-                      duration: 0.4,
-                    });
-                  },
-                });
-              },
-            });
-          }
-
-          break;
+                  animateHouse();
+                  gsap.to('#transition', {
+                    opacity: 0,
+                    duration: 0.4,
+                  });
+                },
+              });
+            },
+          });
         }
+
+        break;
+      }
     }
   }
 

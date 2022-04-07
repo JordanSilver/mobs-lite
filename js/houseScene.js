@@ -102,45 +102,37 @@ function animateHouse() {
           rect1: player,
           rect2: houseZone,
         }) &&
-        overlappingArea > (player.width * player.height) / 2
-      )
-        if (
-          rectCollision({
-            rect1: player,
-            rect2: houseZone,
-          }) &&
-          overlappingArea > (player.width * player.height) / 2
-          // && Math.random() < 0.5
-        ) {
-          // DEACTIVATE CURRENT ANIMATION LOOP
-          if (keys.s.pressed && lastKey == 's') {
-            window.cancelAnimationFrame(houseAniID);
-            audio.tackleHit.play();
+        overlappingArea > (player.width * player.height) / 4
+      ) {
+        // DEACTIVATE CURRENT ANIMATION LOOP
+        if (keys.s.pressed) {
+          window.cancelAnimationFrame(houseAniID);
+          audio.tackleHit.play();
 
-            gsap.to('#transition', {
-              opacity: 1,
-              repeat: 3,
-              yoyo: true,
-              duration: 0.4,
-              onComplete() {
-                gsap.to('#transition', {
-                  opacity: 1,
-                  duration: 0.4,
-                  onComplete() {
-                    // ACTIVE NEW ANIMATION LOOP
+          gsap.to('#transition', {
+            opacity: 1,
+            repeat: 3,
+            yoyo: true,
+            duration: 0.4,
+            onComplete() {
+              gsap.to('#transition', {
+                opacity: 1,
+                duration: 0.4,
+                onComplete() {
+                  // ACTIVE NEW ANIMATION LOOP
 
-                    animate();
-                    gsap.to('#transition', {
-                      opacity: 0,
-                      duration: 0.4,
-                    });
-                  },
-                });
-              },
-            });
-          }
-          break;
+                  animate();
+                  gsap.to('#transition', {
+                    opacity: 0,
+                    duration: 0.4,
+                  });
+                },
+              });
+            },
+          });
         }
+        break;
+      }
     }
   }
 
