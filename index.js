@@ -17,8 +17,8 @@ if (mobile) {
 }
 
 const offset = {
-  x: -300,
-  y: -900,
+  x: -700,
+  y: -1000,
 };
 
 // DRAW BATTLE ZONES
