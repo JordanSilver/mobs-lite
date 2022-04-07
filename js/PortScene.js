@@ -1,27 +1,27 @@
-const houseworld = new Image();
-houseworld.src = './img/houseworld.png';
+const portworld = new Image();
+portworld.src = './img/houseworld.png';
 
-const houseWorldBg = new Sprite({
+const portWorldBg = new Sprite({
   position: {
     x: offset.x,
     y: offset.y,
   },
-  image: houseworld,
+  image: portworld,
 });
-const playersSpeed = 6;
+const portSpeed = 6;
 
 // DRAW EXIT HOUSE BARRIER
-const exitHouseMap = [];
+const exitPortMap = [];
 for (let i = 0; i < exitHouseData.length; i += 70) {
-  exitHouseMap.push(exitHouseData.slice(i, 70 + i));
+  exitPortMap.push(exitHouseData.slice(i, 70 + i));
 }
 
-const exitHouseZones = [];
+const exitHouseZone = [];
 
-exitHouseMap.forEach((row, i) => {
+exitPortMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
     if (symbol === 1) {
-      exitHouseZones.push(
+      exitHouseZone.push(
         new Boundary({
           position: {
             x: j * Boundary.width + offset.x,
@@ -35,17 +35,18 @@ exitHouseMap.forEach((row, i) => {
 
 // DRAW BORDERS FOR COLLISIONS
 
-const houseCollisionMap = [];
-for (let i = 0; i < houseCollision.length; i += 70) {
-  houseCollisionMap.push(houseCollision.slice(i, 70 + i));
+let portCollision = [];
+const portCollisionMap = [];
+for (let i = 0; i < portCollision.length; i += 70) {
+  portCollisionMap.push(portCollision.slice(i, 70 + i));
 }
 
-const boundarie = [];
+const boundari = [];
 
-houseCollisionMap.forEach((row, i) => {
+portCollisionMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
     if (symbol === 403) {
-      boundarie.push(
+      boundari.push(
         new Boundary({
           position: {
             x: j * Boundary.width + offset.x,
@@ -57,16 +58,17 @@ houseCollisionMap.forEach((row, i) => {
   });
 });
 
-const move = [houseWorldBg, ...boundarie, ...exitHouseZones];
+// , ...exitHouseZones <---- SET MOVERS BACK IN
+const movers = [houseWorldBg, ...boundari];
 
-function animateHouse() {
-  const houseAniID = window.requestAnimationFrame(animateHouse);
-  houseWorldBg.draw();
+function animatePort() {
+  const portAniID = window.requestAnimationFrame(animateHouse);
+  portWorldBg.draw();
   // DRAW PLAYER
   player.draw();
 
   // DRAW BOUNDARY
-  boundarie.forEach((boundary) => {
+  boundari.forEach((boundary) => {
     boundary.draw();
     // test collision with bounds
   });
@@ -76,7 +78,7 @@ function animateHouse() {
     exitZone.draw();
   });
 
-  let moving = true;
+  let mova = true;
 
   player.animate = false;
   player.position = {
@@ -110,7 +112,7 @@ function animateHouse() {
       ) {
         // DEACTIVATE CURRENT ANIMATION LOOP
         if (keys.s.pressed) {
-          window.cancelAnimationFrame(houseAniID);
+          window.cancelAnimationFrame(portAniID);
           audio.tackleHit.play();
           audio.Map.play();
           gsap.to('#transition', {
@@ -154,17 +156,17 @@ function animateHouse() {
             ...boundary,
             position: {
               x: boundary.position.x,
-              y: boundary.position.y + playersSpeed,
+              y: boundary.position.y + portSpeed,
             },
           },
         })
       ) {
-        moving = false;
+        mova = false;
         break;
       }
     }
 
-    if (moving) move.forEach((movable) => (movable.position.y += playersSpeed));
+    if (mova) move.forEach((movable) => (movable.position.y += portSpeed));
   } else if (keys.s.pressed && lastKey == 's') {
     player.animate = true;
     player.image = player.sprites.down;
@@ -177,16 +179,16 @@ function animateHouse() {
             ...boundary,
             position: {
               x: boundary.position.x,
-              y: boundary.position.y - playersSpeed,
+              y: boundary.position.y - portSpeed,
             },
           },
         })
       ) {
-        moving = false;
+        mova = false;
         break;
       }
     }
-    if (moving) move.forEach((movable) => (movable.position.y -= playersSpeed));
+    if (mova) move.forEach((movable) => (movable.position.y -= portSpeed));
   } else if (keys.a.pressed && lastKey == 'a') {
     player.animate = true;
     player.image = player.sprites.left;
@@ -198,17 +200,17 @@ function animateHouse() {
           rect2: {
             ...boundary,
             position: {
-              x: boundary.position.x + playersSpeed,
+              x: boundary.position.x + portSpeed,
               y: boundary.position.y,
             },
           },
         })
       ) {
-        moving = false;
+        mova = false;
         break;
       }
     }
-    if (moving) move.forEach((movable) => (movable.position.x += playersSpeed));
+    if (mova) move.forEach((movable) => (movable.position.x += portSpeed));
   } else if (keys.d.pressed && lastKey == 'd') {
     player.animate = true;
     player.image = player.sprites.right;
@@ -221,16 +223,16 @@ function animateHouse() {
             ...boundary,
             position: {
               x: boundary.position.x,
-              y: boundary.position.y - playersSpeed,
+              y: boundary.position.y - portSpeed,
             },
           },
         })
       ) {
-        moving = false;
+        mova = false;
         break;
       }
     }
-    if (moving) move.forEach((movable) => (movable.position.x -= playersSpeed));
+    if (mova) move.forEach((movable) => (movable.position.x -= portSpeed));
   }
 }
 
