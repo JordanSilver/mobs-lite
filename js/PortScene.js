@@ -8,8 +8,8 @@ const offsets = {
 
 const portWorldBg = new Sprite({
   position: {
-    x: offsets.x,
-    y: offsets.y,
+    x: offset.x,
+    y: offset.y,
   },
   image: portworld,
 });

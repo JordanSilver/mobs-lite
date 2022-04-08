@@ -10,19 +10,23 @@ const mobile = window.innerWidth < 600;
 // set size
 // canvas.width = 1024;
 // canvas.height = 576;
+let offset;
 
 if (mobile) {
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth / 0.9;
+  offset = {
+    x: -700,
+    y: -700,
+  };
 } else {
   canvas.width = 1024;
   canvas.height = 576;
+  offset = {
+    x: -650,
+    y: -900,
+  };
 }
-
-const offset = {
-  x: -650,
-  y: -900,
-};
 
 // DRAW BATTLE ZONES
 
