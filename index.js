@@ -49,27 +49,27 @@ battleZonesMap.forEach((row, i) => {
 });
 
 // DRAW ENTER port BARRIER
-// const enterPortMap = [];
-// for (let i = 0; i < enterPortData.length; i += 70) {
-//   enterPortMap.push(enterPortData.slice(i, 70 + i));
-// }
+const enterPortMap = [];
+for (let i = 0; i < enterPortData.length; i += 70) {
+  enterPortMap.push(enterPortData.slice(i, 70 + i));
+}
 
-// const portZones = [];
+const portZones = [];
 
-// enterPortMap.forEach((row, i) => {
-//   row.forEach((symbol, j) => {
-//     if (symbol === 1445) {
-//       portZones.push(
-//         new Boundary({
-//           position: {
-//             x: j * Boundary.width + offset.x,
-//             y: i * Boundary.height + offset.y,
-//           },
-//         })
-//       );
-//     }
-//   });
-// });
+enterPortMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 1445) {
+      portZones.push(
+        new Boundary({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y,
+          },
+        })
+      );
+    }
+  });
+});
 
 // DRAW ENTER HOUSE BARRIER
 const enterHouseMap = [];
@@ -184,13 +184,14 @@ const keys = {
   },
 };
 
-const playerSpeed = 6;
+const playerSpeed = 16;
 const movables = [
   overWorld,
   ...boundaries,
   overWorldFG,
   ...battleZones,
   ...houseZones,
+  ...portZones,
 ];
 
 function rectCollision({ rect1, rect2 }) {
@@ -226,9 +227,9 @@ function animate() {
     houseZone.draw();
   });
   // DRAW ENTER HOUSE ZONE
-  // portZones.forEach((portZone) => {
-  //   portZone.draw();
-  // });
+  portZones.forEach((portZone) => {
+    portZone.draw();
+  });
   // DRAW PLAYER
   player.draw();
 
@@ -353,62 +354,62 @@ function animate() {
     }
   }
   // // PORT ZONE DETECTION & HOUSE ACTIVATION
-  // if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
-  //   for (let i = 0; i < portZones.length; i++) {
-  //     const portZone = portZones[i];
+  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+    for (let i = 0; i < portZones.length; i++) {
+      const portZone = portZones[i];
 
-  //     const overlappingArea =
-  //       (Math.min(
-  //         player.position.x + player.width,
-  //         portZone.position.x + portZone.width
-  //       ) -
-  //         Math.max(player.position.x, portZone.position.x)) *
-  //       (Math.min(
-  //         player.position.y + player.height,
-  //         portZone.position.y + portZone.height
-  //       ) -
-  //         Math.max(player.position.y, portZone.position.y));
+      const overlappingArea =
+        (Math.min(
+          player.position.x + player.width,
+          portZone.position.x + portZone.width
+        ) -
+          Math.max(player.position.x, portZone.position.x)) *
+        (Math.min(
+          player.position.y + player.height,
+          portZone.position.y + portZone.height
+        ) -
+          Math.max(player.position.y, portZone.position.y));
 
-  //     if (
-  //       rectCollision({
-  //         rect1: player,
-  //         rect2: portZone,
-  //       }) &&
-  //       overlappingArea > (player.width * player.height) / 4
-  //     ) {
-  //       // DEACTIVATE CURRENT ANIMATION LOOP
-  //       if (keys.w.pressed) {
-  //         window.cancelAnimationFrame(animationID);
-  //         audio.Map.stop();
-  //         audio.tackleHit.play();
-  //         gsap.to('#transition', {
-  //           opacity: 1,
-  //           repeat: 1,
-  //           yoyo: true,
-  //           duration: 0.2,
-  //           onComplete() {
-  //             gsap.to('#transition', {
-  //               opacity: 1,
-  //               duration: 0.4,
-  //               onComplete() {
-  //                 // ACTIVE NEW ANIMATION LOOP
+      if (
+        rectCollision({
+          rect1: player,
+          rect2: portZone,
+        }) &&
+        overlappingArea > (player.width * player.height) / 4
+      ) {
+        // DEACTIVATE CURRENT ANIMATION LOOP
+        if (keys.w.pressed) {
+          window.cancelAnimationFrame(animationID);
+          audio.Map.stop();
+          audio.tackleHit.play();
+          gsap.to('#transition', {
+            opacity: 1,
+            repeat: 1,
+            yoyo: true,
+            duration: 0.2,
+            onComplete() {
+              gsap.to('#transition', {
+                opacity: 1,
+                duration: 0.4,
+                onComplete() {
+                  // ACTIVE NEW ANIMATION LOOP
 
-  //                 audio.House.play();
-  //                 animatePort();
-  //                 gsap.to('#transition', {
-  //                   opacity: 0,
-  //                   duration: 0.4,
-  //                 });
-  //               },
-  //             });
-  //           },
-  //         });
-  //       }
+                  audio.House.play();
+                  animatePort();
+                  gsap.to('#transition', {
+                    opacity: 0,
+                    duration: 0.4,
+                  });
+                },
+              });
+            },
+          });
+        }
 
-  //       break;
-  //     }
-  //   }
-  // }
+        break;
+      }
+    }
+  }
 
   // !!!!!!! MOVE MAP AND BOUNDARYS WITH COLLISION DETECTION
 

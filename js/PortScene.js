@@ -1,27 +1,34 @@
 const portworld = new Image();
-portworld.src = './img/houseworld.png';
+portworld.src = './img/port-map.png';
+
+const offsets = {
+  x: -650,
+  y: -900,
+};
 
 const portWorldBg = new Sprite({
   position: {
-    x: offset.x,
-    y: offset.y,
+    x: offsets.x,
+    y: offsets.y,
   },
   image: portworld,
 });
+
+// port map speed
 const portSpeed = 6;
 
-// DRAW EXIT HOUSE BARRIER
+// DRAW EXIT PORT BARRIER
 const exitPortMap = [];
-for (let i = 0; i < exitHouseData.length; i += 70) {
-  exitPortMap.push(exitHouseData.slice(i, 70 + i));
+for (let i = 0; i < exitPortData.length; i += 70) {
+  exitPortMap.push(exitPortData.slice(i, 70 + i));
 }
 
-const exitHouseZone = [];
+const exitPortZones = [];
 
 exitPortMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
-    if (symbol === 1) {
-      exitHouseZone.push(
+    if (symbol === 393) {
+      exitPortZones.push(
         new Boundary({
           position: {
             x: j * Boundary.width + offset.x,
@@ -35,7 +42,6 @@ exitPortMap.forEach((row, i) => {
 
 // DRAW BORDERS FOR COLLISIONS
 
-let portCollision = [];
 const portCollisionMap = [];
 for (let i = 0; i < portCollision.length; i += 70) {
   portCollisionMap.push(portCollision.slice(i, 70 + i));
@@ -45,7 +51,7 @@ const boundari = [];
 
 portCollisionMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
-    if (symbol === 403) {
+    if (symbol === 392) {
       boundari.push(
         new Boundary({
           position: {
@@ -58,12 +64,13 @@ portCollisionMap.forEach((row, i) => {
   });
 });
 
-// , ...exitHouseZones <---- SET MOVERS BACK IN
-const movers = [houseWorldBg, ...boundari];
+//
+const portMovers = [portWorldBg, ...boundari, ...exitPortZones];
 
 function animatePort() {
-  const portAniID = window.requestAnimationFrame(animateHouse);
+  const portAniID = window.requestAnimationFrame(animatePort);
   portWorldBg.draw();
+
   // DRAW PLAYER
   player.draw();
 
@@ -74,7 +81,7 @@ function animatePort() {
   });
 
   // DRAW exit ZONES
-  exitHouseZones.forEach((exitZone) => {
+  exitPortZones.forEach((exitZone) => {
     exitZone.draw();
   });
 
@@ -88,30 +95,30 @@ function animatePort() {
 
   // // HOUSE ZONE DETECTION & OVERWORLD ACTIVATION
   if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
-    for (let i = 0; i < exitHouseZones.length; i++) {
-      const houseZone = exitHouseZones[i];
+    for (let i = 0; i < exitPortZones.length; i++) {
+      const portZone = exitPortZones[i];
 
       const overlappingArea =
         (Math.min(
           player.position.x + player.width,
-          houseZone.position.x + houseZone.width
+          portZone.position.x + portZone.width
         ) -
-          Math.max(player.position.x, houseZone.position.x)) *
+          Math.max(player.position.x, portZone.position.x)) *
         (Math.min(
           player.position.y + player.height,
-          houseZone.position.y + houseZone.height
+          portZone.position.y + portZone.height
         ) -
-          Math.max(player.position.y, houseZone.position.y));
+          Math.max(player.position.y, portZone.position.y));
 
       if (
         rectCollision({
           rect1: player,
-          rect2: houseZone,
+          rect2: portZone,
         }) &&
         overlappingArea > (player.width * player.height) / 4
       ) {
         // DEACTIVATE CURRENT ANIMATION LOOP
-        if (keys.s.pressed) {
+        if (keys.w.pressed) {
           window.cancelAnimationFrame(portAniID);
           audio.tackleHit.play();
           audio.Map.play();
@@ -127,7 +134,7 @@ function animatePort() {
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
                   audio.House.stop();
-                  // animate();
+                  animate();
                   gsap.to('#transition', {
                     opacity: 0,
                     duration: 0.4,
@@ -142,13 +149,13 @@ function animatePort() {
     }
   }
 
-  // moving house with collision detection
+  // moving port with collision detection
 
   if (keys.w.pressed && lastKey == 'w') {
     player.animate = true;
     player.image = player.sprites.up;
-    for (let i = 0; i < boundarie.length; i++) {
-      const boundary = boundarie[i];
+    for (let i = 0; i < boundari.length; i++) {
+      const boundary = boundari[i];
       if (
         rectCollision({
           rect1: player,
@@ -166,12 +173,13 @@ function animatePort() {
       }
     }
 
-    if (mova) move.forEach((movable) => (movable.position.y += portSpeed));
+    if (mova)
+      portMovers.forEach((movable) => (movable.position.y += portSpeed));
   } else if (keys.s.pressed && lastKey == 's') {
     player.animate = true;
     player.image = player.sprites.down;
-    for (let i = 0; i < boundarie.length; i++) {
-      const boundary = boundarie[i];
+    for (let i = 0; i < boundari.length; i++) {
+      const boundary = boundari[i];
       if (
         rectCollision({
           rect1: player,
@@ -188,12 +196,13 @@ function animatePort() {
         break;
       }
     }
-    if (mova) move.forEach((movable) => (movable.position.y -= portSpeed));
+    if (mova)
+      portMovers.forEach((movable) => (movable.position.y -= portSpeed));
   } else if (keys.a.pressed && lastKey == 'a') {
     player.animate = true;
     player.image = player.sprites.left;
-    for (let i = 0; i < boundarie.length; i++) {
-      const boundary = boundarie[i];
+    for (let i = 0; i < boundari.length; i++) {
+      const boundary = boundari[i];
       if (
         rectCollision({
           rect1: player,
@@ -210,12 +219,13 @@ function animatePort() {
         break;
       }
     }
-    if (mova) move.forEach((movable) => (movable.position.x += portSpeed));
+    if (mova)
+      portMovers.forEach((movable) => (movable.position.x += portSpeed));
   } else if (keys.d.pressed && lastKey == 'd') {
     player.animate = true;
     player.image = player.sprites.right;
-    for (let i = 0; i < boundarie.length; i++) {
-      const boundary = boundarie[i];
+    for (let i = 0; i < boundari.length; i++) {
+      const boundary = boundari[i];
       if (
         rectCollision({
           rect1: player,
@@ -232,8 +242,8 @@ function animatePort() {
         break;
       }
     }
-    if (mova) move.forEach((movable) => (movable.position.x -= portSpeed));
+    if (mova)
+      portMovers.forEach((movable) => (movable.position.x -= portSpeed));
   }
 }
-
-// animateHouse();
+// animate();
