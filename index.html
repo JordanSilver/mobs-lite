@@ -23,8 +23,8 @@
           id="game-btn-y"
           style="
             position: fixed;
-            bottom: 10%;
-            left: 2rem;
+            bottom: 1.2rem;
+            left: 1rem;
             width: fit-content;
             height: fit-content;
             display: flex;
@@ -37,9 +37,9 @@
             gap: 1rem;
           "
         >
-          <!-- UP -->
+          <!-- GAME BTN LEFT -->
           <div
-            id="game-button-up"
+            id="game-button-left"
             style="position: relative; cursor: pointer; color: white"
           >
             <svg
@@ -47,12 +47,12 @@
               width="56"
               height="56"
               fill="currentColor"
-              class="bi bi-arrow-up-circle"
+              class="bi bi-arrow-left-circle"
               viewBox="0 0 16 16"
             >
               <path
                 fill-rule="evenodd"
-                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
               />
             </svg>
           </div>
@@ -77,45 +77,6 @@
               />
             </svg>
           </div>
-        </div>
-        <div
-          id="game-btn-x"
-          style="
-            position: fixed;
-            bottom: 10%;
-            right: 2rem;
-            width: fit-content;
-            height: fit-content;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 3px 6px;
-            border-radius: 5px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            gap: 1rem;
-          "
-        >
-          <!-- game button left -->
-          <div
-            id="game-button-left"
-            style="position: relative; cursor: pointer; color: white"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="56"
-              height="56"
-              fill="currentColor"
-              class="bi bi-arrow-left-circle"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"
-              />
-            </svg>
-          </div>
-
           <!-- game button right -->
           <div
             id="game-button-right"
@@ -132,6 +93,44 @@
               <path
                 fill-rule="evenodd"
                 d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          id="game-btn-x"
+          style="
+            position: fixed;
+            bottom: 5.2rem;
+            left: 5.5rem;
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 3px 6px;
+            border-radius: 5px 5px 0 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-bottom: none;
+            gap: 1rem;
+          "
+        >
+          <div
+            id="game-button-up"
+            style="position: relative; cursor: pointer; color: white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="56"
+              height="56"
+              fill="currentColor"
+              class="bi bi-arrow-up-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"
               />
             </svg>
           </div>

@@ -17,7 +17,7 @@ if (mobile) {
   canvas.width = window.innerWidth / 0.9;
   offset = {
     x: -700,
-    y: -700,
+    y: -720,
   };
 } else {
   canvas.width = 1024;
@@ -188,7 +188,7 @@ const keys = {
   },
 };
 
-const playerSpeed = 16;
+const playerSpeed = 6;
 const movables = [
   overWorld,
   ...boundaries,

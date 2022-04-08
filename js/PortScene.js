@@ -1,11 +1,6 @@
 const portworld = new Image();
 portworld.src = './img/port-map.png';
 
-const offsets = {
-  x: -650,
-  y: -900,
-};
-
 const portWorldBg = new Sprite({
   position: {
     x: offset.x,
