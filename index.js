@@ -532,6 +532,7 @@ function startScreen() {
       });
     },
   });
+  document.querySelector('#start-screen').style.display = 'none';
 }
 // addevent listener for tap or click to start
 document.querySelector('#start-btn').addEventListener('click', startScreen);
