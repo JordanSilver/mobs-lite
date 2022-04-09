@@ -227,7 +227,7 @@ function animatePort() {
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
                   audio.House.stop();
-                  setTimeout(window.open(url, '_blank'), 100);
+                  setTimeout(window.open(url), 100);
                   gsap.to('#transition', {
                     opacity: 0,
                     duration: 0.4,
