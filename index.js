@@ -528,11 +528,11 @@ function startScreen() {
         duration: 0.5,
         onComplete() {
           animate();
+          document.querySelector('#start-screen').style.display = 'none';
         },
       });
     },
   });
-  document.querySelector('#start-screen').style.display = 'none';
 }
 // addevent listener for tap or click to start
 document.querySelector('#start-btn').addEventListener('click', startScreen);
