@@ -181,8 +181,6 @@ const playerLocation = () => {
   setTimeout(() => window.open(url, params), 200);
 };
 
-console.log(enterWebThreeZones);
-
 function animatePort() {
   const portAniID = window.requestAnimationFrame(animatePort);
   portWorldBg.draw();
