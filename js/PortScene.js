@@ -89,6 +89,15 @@ const portMovers = [
   ...exitPortZones,
   ...enterWebZones,
 ];
+let url;
+const playerLocation = () => {
+  if (portWorldBg.position.x >= -300 && portWorldBg.position.y >= -650) {
+    url = 'https://tagpainting.com';
+  } else if (portWorldBg.position.x >= -300 && portWorldBg.position.y <= -900) {
+    url = 'https://nxt-crypto.netlify.app/';
+  }
+  window.open(url);
+};
 
 function animatePort() {
   const portAniID = window.requestAnimationFrame(animatePort);
@@ -175,20 +184,7 @@ function animatePort() {
       }
     }
   }
-  let url;
 
-  const playerLocation = () => {
-    if (portWorldBg.position.x >= -300 && portWorldBg.position.y >= -650) {
-      url = 'https://tagpainting.com';
-    } else if (
-      portWorldBg.position.x >= -300 &&
-      portWorldBg.position.y <= -900
-    ) {
-      url = 'https://nxt-crypto.netlify.app/';
-    }
-  };
-
-  playerLocation();
   // // WEB ZONE DETECTION
   if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
     for (let i = 0; i < enterWebZones.length; i++) {
@@ -227,9 +223,8 @@ function animatePort() {
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
                   audio.House.stop();
-                  window.open(url);
-                  keys.w.pressed = false;
-                  portWorldBg.position.y -= 30;
+                  playerLocation();
+
                   gsap.to('#transition', {
                     opacity: 0,
                     duration: 0.4,
