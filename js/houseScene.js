@@ -58,6 +58,10 @@ houseCollisionMap.forEach((row, i) => {
 });
 
 const move = [houseWorldBg, ...boundarie, ...exitHouseZones];
+player.position = {
+  x: player.position.x,
+  y: player.position.y,
+};
 
 function animateHouse() {
   const houseAniID = window.requestAnimationFrame(animateHouse);

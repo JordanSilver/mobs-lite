@@ -11,19 +11,22 @@ const mobile = window.innerWidth < 600;
 // canvas.width = 1024;
 // canvas.height = 576;
 let offset;
+let canvasScale = 1;
 
 if (mobile) {
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth / 0.9;
   offset = {
     x: -700,
-    y: -720,
+    y: -800,
   };
 } else {
-  canvas.width = 1024;
-  canvas.height = 576;
+  canvasScale = 1.1;
+  canvas.width = 1024 * canvasScale;
+  canvas.height = 576 * canvasScale;
+
   offset = {
-    x: -650,
+    x: -450,
     y: -900,
   };
 }
@@ -128,7 +131,7 @@ overworld.src = './img/overworld.png';
 
 const overWorld = new Sprite({
   position: { x: offset.x, y: offset.y },
-  velocity: { x: 0, y: 0 },
+
   image: overworld,
 });
 
@@ -137,7 +140,7 @@ foreground.src = './img/overworld-fg.png';
 
 const overWorldFG = new Sprite({
   position: { x: offset.x, y: offset.y },
-  velocity: { x: 0, y: 0 },
+
   image: foreground,
 });
 
