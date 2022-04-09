@@ -120,7 +120,7 @@ function animateBattle() {
 }
 
 // THIS ANIMATE STARTS THIS GAME \/
-animate();
+// animate();
 
 // initBattle();
 // animateBattle();

@@ -17,13 +17,21 @@
   <body>
     <div class="wrap">
       <div id="transition" class="battle-transition"></div>
+      <div id="start-screen" class="start-screen">
+        <img
+          src="./img/startGUI.png"
+          alt="Starting Screen"
+          style="transform: scale(1.5)"
+        />
+        <button id="start-btn"></button>
+      </div>
       <canvas id="overworld"></canvas>
       <div id="game-btn">
         <div
           id="game-btn-y"
           style="
-            position: fixed;
-            bottom: 1.2rem;
+            position: absolute;
+            bottom: 0rem;
             right: 1rem;
             width: fit-content;
             height: fit-content;
@@ -100,8 +108,8 @@
         <div
           id="game-btn-x"
           style="
-            position: fixed;
-            bottom: 4.5rem;
+            position: absolute;
+            bottom: 3.3rem;
             right: 4.4rem;
             width: fit-content;
             height: fit-content;

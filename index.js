@@ -516,7 +516,28 @@ function animate() {
       movables.forEach((movable) => (movable.position.x -= playerSpeed));
   }
 }
-// animate();
+
+// start screen with click to start animate
+function startScreen() {
+  gsap.to('#start-screen', {
+    opacity: 1,
+    duration: 0.5,
+    onComplete() {
+      gsap.to('#start-screen', {
+        opacity: 0,
+        duration: 0.5,
+        onComplete() {
+          animate();
+        },
+      });
+    },
+  });
+}
+// addevent listener for tap or click to start
+document.querySelector('#start-btn').addEventListener('click', startScreen);
+document.querySelector('#start-btn').innerHTML = 'Enter';
+
+// start screen disable
 
 // Event Listeners
 let lastKey = '';
