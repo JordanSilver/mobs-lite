@@ -93,10 +93,20 @@ let url;
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
 width=0,height=0,left=-1000,top=-1000`;
 const playerLocation = () => {
-  if (portWorldBg.position.x >= -300 && portWorldBg.position.y >= -650) {
+  if (portWorldBg.position.x >= -300 && portWorldBg.position.y >= -600) {
     url = 'https://tagpainting.com';
   } else if (portWorldBg.position.x >= -300 && portWorldBg.position.y <= -900) {
     url = 'https://nxt-crypto.netlify.app/';
+  } else if (
+    portWorldBg.position.x <= -1000 &&
+    portWorldBg.position.y >= -600
+  ) {
+    url = 'http://beastmodebattles.herokuapp.com/';
+  } else if (
+    portWorldBg.position.x <= -1000 &&
+    portWorldBg.position.y >= -900
+  ) {
+    url = 'https://exiva-me.vercel.app/';
   }
   setTimeout(() => window.open(url, params), 200);
 };

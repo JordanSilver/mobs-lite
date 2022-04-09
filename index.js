@@ -112,7 +112,7 @@ const boundaries = [];
 
 collisionsMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
-    if (symbol === 1025 || symbol === 1610613761 || symbol === 1446) {
+    if (symbol === 1025 || symbol === 1446) {
       boundaries.push(
         new Boundary({
           position: {
