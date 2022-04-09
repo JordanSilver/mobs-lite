@@ -176,4 +176,13 @@ body {
     height: 100%;
     margin: auto 0;
   }
+  #player-health {
+    bottom: 8rem;
+  }
+  #que-diag {
+    font-size: 0.9rem;
+  }
+  button {
+    font-size: 0.6rem !important;
+  }
 }

@@ -3,8 +3,6 @@ battleBgImg.src = './img/battleBackground.png';
 
 // find mobile size
 
-if (mobile) battleBgImg.width = window.innerWidth;
-
 const batttleBg = new Sprite({
   position: {
     x: 0,
@@ -20,6 +18,7 @@ let emby;
 let renderedSprites;
 let que;
 let battleAnimationId;
+
 // !!! BATTLE ANIMATION LOOP !!!! \\
 
 function initBattle() {
@@ -31,6 +30,10 @@ function initBattle() {
 
   draggle = new Monster(monsters.Draggle);
   emby = new Monster(monsters.Emby);
+  if (mobile) {
+    monsters.Emby.position.x -= 200;
+    monsters.Draggle.position.x -= 550;
+  }
   renderedSprites = [draggle, emby];
   que = [];
   emby.attacks.forEach((attack) => {
