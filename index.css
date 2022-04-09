@@ -210,6 +210,10 @@ body {
     height: 100%;
     margin: auto 0;
   }
+  #start-screen {
+    background-size: 700%;
+    background-position: 20% 50%;
+  }
   #player-health {
     bottom: 8rem;
   }
