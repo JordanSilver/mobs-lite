@@ -229,6 +229,7 @@ function animatePort() {
                   audio.House.stop();
                   window.open(url);
                   keys.w.pressed = false;
+                  portWorldBg.position.y -= 30;
                   gsap.to('#transition', {
                     opacity: 0,
                     duration: 0.4,
