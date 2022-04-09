@@ -20,7 +20,10 @@ let que;
 let battleAnimationId;
 
 // !!! BATTLE ANIMATION LOOP !!!! \\
-
+if (mobile) {
+  monsters.Emby.position.x -= 200;
+  monsters.Draggle.position.x -= 550;
+}
 function initBattle() {
   document.querySelector('#hud').style.display = 'flex';
   document.querySelector('#que-diag').style.display = 'none';
@@ -30,10 +33,7 @@ function initBattle() {
 
   draggle = new Monster(monsters.Draggle);
   emby = new Monster(monsters.Emby);
-  if (mobile) {
-    monsters.Emby.position.x -= 200;
-    monsters.Draggle.position.x -= 550;
-  }
+
   renderedSprites = [draggle, emby];
   que = [];
   emby.attacks.forEach((attack) => {

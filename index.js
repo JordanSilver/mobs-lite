@@ -217,7 +217,7 @@ const battle = {
 // !!!!!!!!!!!! ANIMATION RENDERER !!!!!!!!!!!!! \\
 function animate() {
   const animationID = window.requestAnimationFrame(animate);
-
+  document.querySelector('#game-btn').style.display = 'flex';
   // DRAW OVERWORLD
   overWorld.draw();
   // DRAW BOUNDARY
@@ -273,6 +273,7 @@ function animate() {
       ) {
         // DEACTIVATE CURRENT ANIMATION LOOP
         window.cancelAnimationFrame(animationID);
+        document.querySelector('#game-btn').style.display = 'none';
         audio.Map.stop();
         audio.initBattle.play();
         audio.battle.play();
