@@ -90,14 +90,15 @@ const portMovers = [
   ...enterWebZones,
 ];
 let url;
+let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+width=0,height=0,left=-1000,top=-1000`;
 const playerLocation = () => {
   if (portWorldBg.position.x >= -300 && portWorldBg.position.y >= -650) {
     url = 'https://tagpainting.com';
   } else if (portWorldBg.position.x >= -300 && portWorldBg.position.y <= -900) {
     url = 'https://nxt-crypto.netlify.app/';
   }
-  const timeOut = setTimeout(window.open(url), 200);
-  clearTimeout(timeOut);
+  setTimeout(() => window.open(url, params), 200);
 };
 
 function animatePort() {
