@@ -96,7 +96,8 @@ const playerLocation = () => {
   } else if (portWorldBg.position.x >= -300 && portWorldBg.position.y <= -900) {
     url = 'https://nxt-crypto.netlify.app/';
   }
-  window.open(url);
+  const timeOut = setTimeout(window.open(url), 200);
+  clearTimeout(timeOut);
 };
 
 function animatePort() {
