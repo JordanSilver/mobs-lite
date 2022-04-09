@@ -536,6 +536,7 @@ function startScreen() {
 // addevent listener for tap or click to start
 document.querySelector('#start-btn').addEventListener('click', startScreen);
 document.querySelector('#start-btn').innerHTML = 'Enter';
+audio.House.play();
 
 // start screen disable
 
