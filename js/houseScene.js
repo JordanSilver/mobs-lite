@@ -9,11 +9,6 @@ const houseWorldBg = new Sprite({
   image: houseworld,
 });
 let playersSpeed = 6;
-if (mobile) {
-  playersSpeed = 3;
-} else {
-  playersSpeed = 6;
-}
 
 // DRAW EXIT HOUSE BARRIER
 const exitHouseMap = [];

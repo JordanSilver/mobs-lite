@@ -16,7 +16,7 @@ let playerSpeed = 6;
 if (mobile) {
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth / 0.9;
-  playerSpeed = 3;
+
   offset = {
     x: -700,
     y: -800,
@@ -25,7 +25,7 @@ if (mobile) {
   canvasScale = 1.1;
   canvas.width = 1024 * canvasScale;
   canvas.height = 576 * canvasScale;
-  playerSpeed = 6;
+
   offset = {
     x: -450,
     y: -900,
@@ -571,7 +571,7 @@ tapStart.style.cursor = 'pointer';
 startBtn.style.display = 'block';
 startBtn.innerHTML = 'Enter';
 startBtn.addEventListener('click', startScreen);
-startBtn.addEventListener('touchstart', startScreen);
+// startBtn.addEventListener('touchstart', startScreen);
 
 gsap.to('#progress-bar', {
   width: '0',
