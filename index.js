@@ -12,10 +12,11 @@ const mobile = window.innerWidth < 600;
 // canvas.height = 576;
 let offset;
 let canvasScale = 1;
-
+let playerSpeed = 6;
 if (mobile) {
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth / 0.9;
+  playerSpeed = 4;
   offset = {
     x: -700,
     y: -800,
@@ -24,7 +25,7 @@ if (mobile) {
   canvasScale = 1.1;
   canvas.width = 1024 * canvasScale;
   canvas.height = 576 * canvasScale;
-
+  playerSpeed = 6;
   offset = {
     x: -450,
     y: -900,
@@ -191,7 +192,6 @@ const keys = {
   },
 };
 
-const playerSpeed = 6;
 const movables = [
   overWorld,
   ...boundaries,
