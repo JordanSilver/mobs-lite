@@ -48,7 +48,7 @@ body {
   align-items: center;
   flex-flow: column nowrap;
   z-index: 90;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 0, 1);
   color: white;
 }
 

@@ -30,27 +30,29 @@
             height: 5rem;
             padding: 2rem;
             border-radius: 50%;
-            background: #fff;
+
             box-shadow: 0 0 0.5rem 0.5rem #000;
           "
-          class="spinner-grow text-white"
+          class="spinner-grow text-success"
           role="status"
         >
           <span class="sr-only">Loading...</span>
         </div>
-
-        <span class="mt-5">Loading...</span>
-        <div class="progress">
+        <div
+          class="progress"
+          style="width: 20rem; margin-top: 5rem; transform: translateY(-50%)"
+        >
           <div
             id="progress-bar"
-            class="progress"
+            class="progress-bar bg-success"
+            style="width: 0%"
             role="progressbar"
-            style="width: 25%"
-            aria-valuenow="25"
+            aria-valuenow="0"
             aria-valuemin="0"
             aria-valuemax="100"
           ></div>
         </div>
+        <span class="mt-5">Loading...</span>
       </div>
       <div id="start-screen" class="start-screen">
         <img

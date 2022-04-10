@@ -550,26 +550,30 @@ document.querySelector('#start-btn').addEventListener('click', startScreen);
 
 console.log(clicked);
 // remove loading screen after 5 seconds
-setTimeout(() => {
-  //  gsap fade loading screen out to start screen after 5 seconds
-  gsap.to('#progress', {
-    width: '0',
-    duration: 1,
-    onComplete() {
-      gsap.to('#progress', {
-        width: '100%',
-        duration: 2,
-      });
-    },
-  });
-  gsap.to('#loading', {
-    opacity: 0,
-    duration: 0.5,
-    onComplete() {
-      document.querySelector('#loading').style.display = 'none';
-    },
-  });
-}, 3000);
+gsap.to('#progress-bar', {
+  width: '0',
+  ariaValueNow: '0%',
+  duration: 0,
+
+  onComplete() {
+    gsap.to('#progress-bar', {
+      width: '100%',
+      ariaValueNow: '100%',
+      duration: 2,
+      onComplete() {
+        setTimeout(() => {
+          gsap.to('#loading', {
+            opacity: 0,
+            duration: 0.5,
+            onComplete() {
+              document.querySelector('#loading').style.display = 'none';
+            },
+          });
+        }, 1000);
+      },
+    });
+  },
+});
 
 // Event Listeners
 let lastKey = '';

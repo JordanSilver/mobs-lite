@@ -125,6 +125,8 @@ function animateBattle() {
 // initBattle();
 // animateBattle();
 
+// TAKE BELOW FOR NPC DIALOG
+
 document.querySelector('#que-diag').addEventListener('click', (e) => {
   if (que.length > 0) {
     que[0]();
