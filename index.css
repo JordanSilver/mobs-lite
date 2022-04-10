@@ -81,6 +81,7 @@ body {
   color: white;
   border-radius: 5px;
   transform: translateY(200%);
+  opacity: 0;
 }
 #start-btn {
   background-color: white;

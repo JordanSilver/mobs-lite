@@ -542,6 +542,7 @@ let tapStartTimer = setInterval(() => {
     gsap.to('#start-hud', {
       translateY: '0%',
       duration: 0.4,
+      opacity: 1,
     });
   }
 }, 1000);
@@ -631,6 +632,92 @@ window.addEventListener('keydown', (e) => {
 });
 
 // Mobile game pad touch listeners
+
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+
+var xDown = null;
+var yDown = null;
+
+function getTouches(evt) {
+  return (
+    evt.touches || // browser API
+    evt.originalEvent.touches
+  ); // jQuery
+}
+
+function handleTouchStart(evt) {
+  const firstTouch = getTouches(evt)[0];
+  xDown = firstTouch.clientX;
+  yDown = firstTouch.clientY;
+}
+
+function handleTouchMove(evt) {
+  if (!xDown || !yDown) {
+    return;
+  }
+
+  var xUp = evt.touches[0].clientX;
+  var yUp = evt.touches[0].clientY;
+
+  var xDiff = xDown - xUp;
+  var yDiff = yDown - yUp;
+
+  if (Math.abs(xDiff) > Math.abs(yDiff)) {
+    /*most significant*/
+    if (xDiff > 0) {
+      /* right swipe */
+
+      keys.a = {
+        pressed: true,
+      };
+      lastKey = 'a';
+    } else {
+      /* left swipe */
+      keys.d = {
+        pressed: true,
+      };
+      lastKey = 'd';
+    }
+  } else {
+    if (yDiff > 0) {
+      /* up swipe */
+      keys.w = {
+        pressed: true,
+      };
+      lastKey = 'w';
+    } else {
+      /* up swipe */
+      keys.s = {
+        pressed: true,
+      };
+      lastKey = 's';
+    }
+  }
+  /* reset values */
+
+  xDown = null;
+  yDown = null;
+}
+
+// handle touch end
+document.addEventListener('touchend', handleTouchEnd, false);
+
+function handleTouchEnd(evt) {
+  keys.w = {
+    pressed: false,
+  };
+  keys.s = {
+    pressed: false,
+  };
+  keys.a = {
+    pressed: false,
+  };
+  keys.d = {
+    pressed: false,
+  };
+}
+
 gameLeft.addEventListener('touchstart', () => {
   keys.a.pressed = true;
   lastKey = 'a';
