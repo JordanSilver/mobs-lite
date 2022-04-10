@@ -516,6 +516,12 @@ function animate() {
       movables.forEach((movable) => (movable.position.x -= playerSpeed));
   }
 }
+
+const tapStart = document.querySelector('#tap-start');
+const startBtn = document.querySelector('#start-btn');
+const loading = document.querySelector('#loading');
+const startHud = document.querySelector('#start-hud');
+
 let clicked = false;
 window.addEventListener('click', () => {
   if (!clicked) {
@@ -523,6 +529,22 @@ window.addEventListener('click', () => {
     clicked = true;
   }
 });
+
+// Flash tap-start text on screen if !clicked
+let tapStartTimer = setInterval(() => {
+  if (!clicked) {
+    tapStart.style.opacity = 1;
+    setTimeout(() => {
+      tapStart.style.opacity = 0;
+    }, 500);
+  } else {
+    clearInterval(tapStartTimer);
+    gsap.to('#start-hud', {
+      translateY: '0%',
+      duration: 0.4,
+    });
+  }
+}, 1000);
 
 // start screen with click to start animate
 function startScreen() {
@@ -543,13 +565,13 @@ function startScreen() {
 }
 // addevent listener for tap or click to start
 
-document.querySelector('#tap-start').innerHTML = 'Tap to start';
-document.querySelector('#start-btn').style.display = 'block';
-document.querySelector('#start-btn').innerHTML = 'Enter';
-document.querySelector('#start-btn').addEventListener('click', startScreen);
+tapStart.innerHTML = 'Tap to start.';
+tapStart.style.fontSize = '1.5rem';
+startBtn.style.display = 'block';
+startBtn.innerHTML = 'Enter';
+startBtn.addEventListener('click', startScreen);
+startBtn.addEventListener('touchstart', startScreen);
 
-console.log(clicked);
-// remove loading screen after 5 seconds
 gsap.to('#progress-bar', {
   width: '0',
   ariaValueNow: '0%',
@@ -566,7 +588,7 @@ gsap.to('#progress-bar', {
             opacity: 0,
             duration: 0.5,
             onComplete() {
-              document.querySelector('#loading').style.display = 'none';
+              loading.style.display = 'none';
             },
           });
         }, 1000);
