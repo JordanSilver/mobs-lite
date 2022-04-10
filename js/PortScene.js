@@ -10,7 +10,12 @@ const portWorldBg = new Sprite({
 });
 
 // port map speed
-const portSpeed = 7;
+let portSpeed = 7;
+if (mobile) {
+  portSpeed = 3;
+} else {
+  portSpeed = 7;
+}
 
 // DRAW EXIT PORT BARRIER
 const exitPortMap = [];

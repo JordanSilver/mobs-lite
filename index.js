@@ -16,7 +16,7 @@ let playerSpeed = 6;
 if (mobile) {
   canvas.height = window.innerHeight;
   canvas.width = window.innerWidth / 0.9;
-  playerSpeed = 4;
+  playerSpeed = 3;
   offset = {
     x: -700,
     y: -800,
