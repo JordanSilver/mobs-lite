@@ -567,6 +567,7 @@ function startScreen() {
 
 tapStart.innerHTML = 'Tap to start.';
 tapStart.style.fontSize = '1.5rem';
+tapStart.style.cursor = 'pointer';
 startBtn.style.display = 'block';
 startBtn.innerHTML = 'Enter';
 startBtn.addEventListener('click', startScreen);
