@@ -516,6 +516,13 @@ function animate() {
       movables.forEach((movable) => (movable.position.x -= playerSpeed));
   }
 }
+let clicked = false;
+window.addEventListener('click', () => {
+  if (!clicked) {
+    audio.Map.play();
+    clicked = true;
+  }
+});
 
 // start screen with click to start animate
 function startScreen() {
@@ -535,11 +542,34 @@ function startScreen() {
   });
 }
 // addevent listener for tap or click to start
-document.querySelector('#start-btn').addEventListener('click', startScreen);
-document.querySelector('#start-btn').innerHTML = 'Enter';
-audio.House.play();
 
-// start screen disable
+document.querySelector('#tap-start').innerHTML = 'Tap to start';
+document.querySelector('#start-btn').style.display = 'block';
+document.querySelector('#start-btn').innerHTML = 'Enter';
+document.querySelector('#start-btn').addEventListener('click', startScreen);
+
+console.log(clicked);
+// remove loading screen after 5 seconds
+setTimeout(() => {
+  //  gsap fade loading screen out to start screen after 5 seconds
+  gsap.to('#progress', {
+    width: '0',
+    duration: 1,
+    onComplete() {
+      gsap.to('#progress', {
+        width: '100%',
+        duration: 2,
+      });
+    },
+  });
+  gsap.to('#loading', {
+    opacity: 0,
+    duration: 0.5,
+    onComplete() {
+      document.querySelector('#loading').style.display = 'none';
+    },
+  });
+}, 3000);
 
 // Event Listeners
 let lastKey = '';
@@ -626,13 +656,5 @@ window.addEventListener('keyup', (e) => {
         pressed: false,
       };
       break;
-  }
-});
-
-let clicked = false;
-window.addEventListener('click', () => {
-  if (!clicked) {
-    audio.Map.play();
-    clicked = true;
   }
 });
