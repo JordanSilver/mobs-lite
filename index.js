@@ -521,6 +521,7 @@ const tapStart = document.querySelector('#tap-start');
 const startBtn = document.querySelector('#start-btn');
 const loading = document.querySelector('#loading');
 const startHud = document.querySelector('#start-hud');
+const typeEffect = document.querySelector('#type-effect-loading');
 
 let clicked = false;
 window.addEventListener('click', () => {
@@ -529,6 +530,17 @@ window.addEventListener('click', () => {
     clicked = true;
   }
 });
+
+// typewriter effect for typeEffect
+const typeEffectText = typeEffect.innerHTML;
+let typeEffectIndex = 0;
+
+const typeEffectInterval = setInterval(() => {
+  typeEffect.innerHTML = typeEffectText.slice(0, typeEffectIndex++);
+  if (typeEffectIndex > typeEffectText.length) {
+    clearInterval(typeEffectInterval);
+  }
+}, 200);
 
 // Flash tap-start text on screen if !clicked
 let tapStartTimer = setInterval(() => {

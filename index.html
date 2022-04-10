@@ -59,20 +59,14 @@
     <div class="wrap">
       <div id="transition" class="battle-transition"></div>
       <div id="loading" class="loading">
-        <div
-          style="
-            width: 5rem;
-            height: 5rem;
-            padding: 2rem;
-            border-radius: 50%;
-
-            box-shadow: 0 0 0.5rem 0.5rem #000;
-          "
-          class="spinner-grow text-success"
-          role="status"
-        >
-          <span class="sr-only">Loading...</span>
+        <div class="pixel-loader">
+          <span class="pixel pixel-1"></span>
+          <span class="pixel pixel-2"></span>
+          <span class="pixel pixel-3"></span>
+          <span class="pixel pixel-4 pixel-medium"></span>
+          <span class="pixel pixel-5 pixel-small"></span>
         </div>
+
         <div
           class="progress"
           style="width: 20rem; margin-top: 5rem; transform: translateY(-50%)"
@@ -87,7 +81,7 @@
             aria-valuemax="100"
           ></div>
         </div>
-        <span class="mt-5">Loading...</span>
+        <span id="type-effect-loading" class="mt-5">Loading</span>
       </div>
       <div id="start-screen" class="start-screen">
         <img
