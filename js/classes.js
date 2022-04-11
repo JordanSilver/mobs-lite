@@ -24,6 +24,12 @@ class Sprite {
     this.rotation = rotation;
   }
 
+  npcChat() {
+    //  show que-dialog with chat
+    document.querySelector('#que-diag').style.display = `block`;
+    document.querySelector('#que-diag').innerHTML = ` fainted!`;
+  }
+
   draw() {
     c.save();
     c.translate(

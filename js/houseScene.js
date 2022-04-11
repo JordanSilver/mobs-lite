@@ -8,7 +8,30 @@ const houseWorldBg = new Sprite({
   },
   image: houseworld,
 });
+
+const houseNPC = new Image();
+houseNPC.src = './img/playerDown.png';
+
+const houseNPCS = new Sprite({
+  position: {
+    x: canvas.width / 2 - 192 / 4 / 2,
+    y: canvas.height / 2 - 400,
+  },
+  image: houseNPC,
+  frames: {
+    max: 4,
+    hold: 10,
+  },
+  sprites: {
+    // up: playerUp,
+    // left: playerLeft,
+    // right: playerRight,
+    down: houseNPC,
+  },
+});
+
 let playersSpeed = 6;
+let npcQue;
 
 // DRAW EXIT HOUSE BARRIER
 const exitHouseMap = [];
@@ -57,7 +80,37 @@ houseCollisionMap.forEach((row, i) => {
   });
 });
 
-const move = [houseWorldBg, ...boundarie, ...exitHouseZones];
+// DRAW NPC CHATS
+const npcCollisionMap = [];
+for (let i = 0; i < npcChatData.length; i += 70) {
+  npcCollisionMap.push(npcChatData.slice(i, 70 + i));
+}
+
+const npcChatZones = [];
+
+npcCollisionMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 1) {
+      npcChatZones.push(
+        new Boundary({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y,
+          },
+        })
+      );
+    }
+  });
+});
+
+const move = [
+  houseWorldBg,
+  ...boundarie,
+  ...exitHouseZones,
+  houseNPCS,
+  ...npcChatZones,
+];
+
 player.position = {
   x: player.position.x,
   y: player.position.y,
@@ -66,6 +119,10 @@ player.position = {
 function animateHouse() {
   const houseAniID = window.requestAnimationFrame(animateHouse);
   houseWorldBg.draw();
+
+  // DRAW NPCS
+  houseNPCS.draw();
+
   // DRAW PLAYER
   player.draw();
 
@@ -79,7 +136,11 @@ function animateHouse() {
   exitHouseZones.forEach((exitZone) => {
     exitZone.draw();
   });
-
+  // DRAW NPC ZONES
+  npcChatZones.forEach((npcZone) => {
+    npcZone.draw();
+  });
+  npcQue = [];
   let moving = true;
 
   player.animate = false;
@@ -140,6 +201,40 @@ function animateHouse() {
           });
         }
         break;
+      }
+    }
+  }
+  // // NPC ZONE DETECTION & QUE ACTIVATION
+  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+    for (let i = 0; i < npcChatZones.length; i++) {
+      const npcZone = npcChatZones[i];
+
+      const overlappingArea =
+        (Math.min(
+          player.position.x + player.width,
+          npcZone.position.x + npcZone.width
+        ) -
+          Math.max(player.position.x, npcZone.position.x)) *
+        (Math.min(
+          player.position.y + player.height,
+          npcZone.position.y + npcZone.height
+        ) -
+          Math.max(player.position.y, npcZone.position.y));
+
+      if (
+        rectCollision({
+          rect1: player,
+          rect2: npcZone,
+        }) &&
+        overlappingArea > (player.width * player.height) / 4
+      ) {
+        // DEACTIVATE CURRENT ANIMATION LOOP
+        if (keys.w.pressed) {
+          console.log('npc chatting');
+          npcQue.push(() => {
+            npcQue.npcChat();
+          });
+        }
       }
     }
   }
@@ -238,4 +333,11 @@ function animateHouse() {
   }
 }
 
+document.querySelector('#que-diag').addEventListener('click', (e) => {
+  if (npcQue.length > 0) {
+    npcQue[0]();
+    npcQue.shift();
+  } else e.currentTarget.style.display = 'none';
+});
+console.log(npcQue);
 // animateHouse();

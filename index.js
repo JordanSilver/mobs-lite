@@ -6,7 +6,7 @@ const gameDown = document.querySelector('#game-button-down');
 const gameLeft = document.querySelector('#game-button-left');
 const gameRight = document.querySelector('#game-button-right');
 // find mobile size
-const mobile = window.innerWidth < 600;
+const mobile = window.innerWidth < 768;
 // set size
 // canvas.width = 1024;
 // canvas.height = 576;
@@ -569,6 +569,8 @@ function startScreen() {
         opacity: 0,
         duration: 0.5,
         onComplete() {
+          //  THIS ANIMATE STARTS THE GAME \\
+
           animate();
           document.querySelector('#start-screen').style.display = 'none';
         },

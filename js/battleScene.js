@@ -99,7 +99,6 @@ function initBattle() {
               });
               battle.initiated = false;
               audio.battle.stop();
-              audio.Map.play();
             },
           });
         });
