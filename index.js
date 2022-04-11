@@ -522,7 +522,7 @@ const startBtn = document.querySelector('#start-btn');
 const loading = document.querySelector('#loading');
 const startHud = document.querySelector('#start-hud');
 const typeEffect = document.querySelector('#type-effect-loading');
-
+const startImg = document.querySelector('#start-hero');
 let clicked = false;
 window.addEventListener('click', () => {
   if (!clicked) {
@@ -570,8 +570,9 @@ function startScreen() {
         duration: 0.5,
         onComplete() {
           //  THIS ANIMATE STARTS THE GAME \\
-          animateHouse();
-          // animate();
+
+          animate();
+
           document.querySelector('#start-screen').style.display = 'none';
         },
       });
@@ -637,6 +638,31 @@ window.addEventListener('keydown', (e) => {
       lastKey = 'a';
       break;
     case 'd':
+      keys.d = {
+        pressed: true,
+      };
+      lastKey = 'd';
+      break;
+    // arrow keys
+    case 'ArrowUp':
+      keys.w = {
+        pressed: true,
+      };
+      lastKey = 'w';
+      break;
+    case 'ArrowDown':
+      keys.s = {
+        pressed: true,
+      };
+      lastKey = 's';
+      break;
+    case 'ArrowLeft':
+      keys.a = {
+        pressed: true,
+      };
+      lastKey = 'a';
+      break;
+    case 'ArrowRight':
       keys.d = {
         pressed: true,
       };
@@ -780,6 +806,27 @@ window.addEventListener('keyup', (e) => {
       };
       break;
     case 'd':
+      keys.d = {
+        pressed: false,
+      };
+      break;
+    // arrow keys
+    case 'ArrowUp':
+      keys.w = {
+        pressed: false,
+      };
+      break;
+    case 'ArrowDown':
+      keys.s = {
+        pressed: false,
+      };
+      break;
+    case 'ArrowLeft':
+      keys.a = {
+        pressed: false,
+      };
+      break;
+    case 'ArrowRight':
       keys.d = {
         pressed: false,
       };

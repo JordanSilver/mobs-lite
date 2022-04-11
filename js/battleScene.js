@@ -36,6 +36,7 @@ function initBattle() {
 
   renderedSprites = [draggle, emby];
   que = [];
+
   emby.attacks.forEach((attack) => {
     const button = document.createElement('button');
     button.innerText = attack.name;
@@ -114,12 +115,9 @@ function initBattle() {
 function animateBattle() {
   battleAnimationId = window.requestAnimationFrame(animateBattle);
   batttleBg.draw();
-
+  console.log(que);
   renderedSprites.forEach((sprite) => sprite.draw());
 }
-
-// THIS ANIMATE STARTS THIS GAME \/
-// animate();
 
 // initBattle();
 // animateBattle();

@@ -12,7 +12,7 @@ const houseWorldBg = new Sprite({
 const houseNPC = new Image();
 houseNPC.src = './img/playerDown.png';
 
-const houseNPCS = new Sprite({
+const houseNPCS = new Monster({
   position: {
     // keep position fixed to background
     x: -offset.x / 2 - houseNPC.width / 2 + 375,
@@ -35,8 +35,7 @@ const houseNPCS = new Sprite({
 });
 
 let playersSpeed = 6;
-let npcQue;
-console.log(houseNPCS);
+
 // DRAW EXIT HOUSE BARRIER
 const exitHouseMap = [];
 for (let i = 0; i < exitHouseData.length; i += 70) {
@@ -107,7 +106,7 @@ npcCollisionMap.forEach((row, i) => {
   });
 });
 
-if (mobile) {
+if (mobile || !mobile) {
   houseNPCS.position.x = npcChatZones[0].position.x;
   houseNPCS.position.y = npcChatZones[0].position.y;
 }
@@ -124,6 +123,24 @@ player.position = {
   x: player.position.x,
   y: player.position.y,
 };
+
+const chatBoxHtml = document.querySelector('#npcChatBox');
+const chat = document.querySelector('#npcChat');
+
+let npcDialoges = [
+  'Come Back Later!',
+  'One moment please...',
+  'Welcome to my portfolio ! ',
+  'I am a web developer',
+  'Feel free to look around',
+  'I am happy to talk with you, ',
+  "But they havn't programmed that yet",
+  'Ciao, for now!',
+];
+
+function npcChat() {
+  chat.innerHTML = npcDialoges[0];
+}
 
 function animateHouse() {
   const houseAniID = window.requestAnimationFrame(animateHouse);
@@ -149,7 +166,7 @@ function animateHouse() {
   npcChatZones.forEach((npcZone) => {
     npcZone.draw();
   });
-  npcQue = [];
+
   let moving = true;
 
   player.animate = false;
@@ -213,7 +230,7 @@ function animateHouse() {
       }
     }
   }
-  // // NPC ZONE DETECTION & QUE ACTIVATION
+  // // NPC ZONE DETECTION & CHAT ACTIVATION
   if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
     for (let i = 0; i < npcChatZones.length; i++) {
       const npcZone = npcChatZones[i];
@@ -237,13 +254,10 @@ function animateHouse() {
         }) &&
         overlappingArea > (player.width * player.height) / 4
       ) {
-        // DEACTIVATE CURRENT ANIMATION LOOP
-        if (keys.w.pressed) {
-          console.log('npc chatting');
-          npcQue.push(() => {
-            npcQue.npcChat();
-          });
-        }
+        npcChat();
+        chatBoxHtml.style.display = 'flex';
+      } else {
+        chatBoxHtml.style.display = 'none';
       }
     }
   }
@@ -341,12 +355,3 @@ function animateHouse() {
     if (moving) move.forEach((movable) => (movable.position.x -= playersSpeed));
   }
 }
-
-document.querySelector('#que-diag').addEventListener('click', (e) => {
-  if (npcQue.length > 0) {
-    npcQue[0]();
-    npcQue.shift();
-  } else e.currentTarget.style.display = 'none';
-});
-console.log(npcQue);
-// animateHouse();

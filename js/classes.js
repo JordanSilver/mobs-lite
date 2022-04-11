@@ -24,12 +24,6 @@ class Sprite {
     this.rotation = rotation;
   }
 
-  npcChat() {
-    //  show que-dialog with chat
-    document.querySelector('#que-diag').style.display = `block`;
-    document.querySelector('#que-diag').innerHTML = ` fainted!`;
-  }
-
   draw() {
     c.save();
     c.translate(
@@ -90,6 +84,12 @@ class Monster extends Sprite {
     this.isEnemy = isEnemy;
     this.name = name;
     this.attacks = attacks;
+  }
+  npcChat() {
+    //  show que-dialog with chat
+    console.log('class chat func');
+    document.querySelector('#que-diag').style.display = `flex`;
+    document.querySelector('#que-diag').innerHTML = ` fainted!`;
   }
 
   faint() {

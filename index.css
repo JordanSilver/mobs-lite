@@ -195,6 +195,59 @@ body {
 #hud {
   display: none;
 }
+#start-hero {
+  opacity: 1;
+}
+
+#npcChatBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -400%);
+  height: 35px;
+  padding: 6px;
+  display: none;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+
+  background-color: rgba(255, 255, 255, 1);
+  color: black;
+  border-radius: 5px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+#npcChat {
+  max-width: fit-content;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: 0.15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: 0.15em; /* Adjust as needed */
+  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: orange;
+  }
+}
 
 #attack-interface {
   background-color: #fff;
