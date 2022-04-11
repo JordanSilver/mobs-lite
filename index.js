@@ -570,8 +570,8 @@ function startScreen() {
         duration: 0.5,
         onComplete() {
           //  THIS ANIMATE STARTS THE GAME \\
-
-          animate();
+          animateHouse();
+          // animate();
           document.querySelector('#start-screen').style.display = 'none';
         },
       });

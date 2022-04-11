@@ -14,8 +14,12 @@ houseNPC.src = './img/playerDown.png';
 
 const houseNPCS = new Sprite({
   position: {
-    x: canvas.width / 2 - 192 / 4 / 2,
-    y: canvas.height / 2 - 400,
+    // keep position fixed to background
+    x: -offset.x / 2 - houseNPC.width / 2 + 375,
+    y: -offset.y / 2 - houseNPC.height / 2 - 490,
+
+    // x: 329,
+    // y: 77.5,
   },
   image: houseNPC,
   frames: {
@@ -32,7 +36,7 @@ const houseNPCS = new Sprite({
 
 let playersSpeed = 6;
 let npcQue;
-
+console.log(houseNPCS);
 // DRAW EXIT HOUSE BARRIER
 const exitHouseMap = [];
 for (let i = 0; i < exitHouseData.length; i += 70) {
