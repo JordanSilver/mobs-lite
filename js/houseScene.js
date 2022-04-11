@@ -33,6 +33,10 @@ const houseNPCS = new Sprite({
     down: houseNPC,
   },
 });
+if (mobile) {
+  houseNPCS.position.x = -offset.x / 2 - houseNPC.width / 2;
+  houseNPCS.position.y = -offset.y / 2 - houseNPC.height / 2 - 375;
+}
 
 let playersSpeed = 6;
 let npcQue;
