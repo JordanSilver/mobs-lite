@@ -19,7 +19,7 @@ const houseWorldBg = new Sprite({
 });
 
 const houseNPC = new Image();
-houseNPC.src = './img/playerDown.png';
+houseNPC.src = './img/playerTwoDown.png';
 
 const houseNPCS = new Monster({
   position: {

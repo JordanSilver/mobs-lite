@@ -20,7 +20,7 @@ const portFGS = new Sprite({
 
 // portfolio NPC
 const portNPC = new Image();
-portNPC.src = './img/playerDown.png';
+portNPC.src = './img/playerTwoDown.png';
 
 const portNPCS = new Monster({
   position: {
