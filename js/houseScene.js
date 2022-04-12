@@ -1,6 +1,15 @@
 const houseworld = new Image();
 houseworld.src = './img/houseworld.png';
 
+const houseGFg = new Image();
+houseGFg.src = './img/houseworld-fg.png';
+
+const houseFG = new Sprite({
+  position: { x: offset.x, y: offset.y },
+
+  image: houseGFg,
+});
+
 const houseWorldBg = new Sprite({
   position: {
     x: offset.x,
@@ -117,6 +126,7 @@ const move = [
   ...exitHouseZones,
   houseNPCS,
   ...npcChatZones,
+  houseFG,
 ];
 
 player.position = {
@@ -166,6 +176,9 @@ function animateHouse() {
   npcChatZones.forEach((npcZone) => {
     npcZone.draw();
   });
+
+  // house foreground
+  houseFG.draw();
 
   let moving = true;
 

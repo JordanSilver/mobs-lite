@@ -9,6 +9,41 @@ const portWorldBg = new Sprite({
   image: portworld,
 });
 
+const portFg = new Image();
+portFg.src = './img/port-map-fg.png';
+
+const portFGS = new Sprite({
+  position: { x: offset.x, y: offset.y },
+
+  image: portFg,
+});
+
+// portfolio NPC
+const portNPC = new Image();
+portNPC.src = './img/playerDown.png';
+
+const portNPCS = new Monster({
+  position: {
+    // keep position fixed to background
+    x: canvas.width / 4,
+    y: canvas.height / 4,
+
+    // x: 329,
+    // y: 77.5,
+  },
+  image: portNPC,
+  frames: {
+    max: 4,
+    hold: 10,
+  },
+  sprites: {
+    // up: playerUp,
+    // left: playerLeft,
+    // right: playerRight,
+    down: portNPC,
+  },
+});
+
 // port map speed
 let portSpeed = 7;
 
@@ -125,6 +160,57 @@ enterWebMapFour.forEach((row, i) => {
   });
 });
 
+// char set
+const charSetMap = [];
+for (let i = 0; i < portCharSetData.length; i += 70) {
+  charSetMap.push(portCharSetData.slice(i, 70 + i));
+}
+
+const charSetZones = [];
+
+charSetMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 393) {
+      charSetZones.push(
+        new Boundary({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y,
+          },
+        })
+      );
+    }
+  });
+});
+
+// chat zones
+const portNpcMap = [];
+for (let i = 0; i < portNPCData.length; i += 70) {
+  portNpcMap.push(portNPCData.slice(i, 70 + i));
+}
+
+const npcPortChatZones = [];
+
+portNpcMap.forEach((row, i) => {
+  row.forEach((symbol, j) => {
+    if (symbol === 393) {
+      npcPortChatZones.push(
+        new Boundary({
+          position: {
+            x: j * Boundary.width + offset.x,
+            y: i * Boundary.height + offset.y,
+          },
+        })
+      );
+    }
+  });
+});
+
+if (mobile || !mobile) {
+  portNPCS.position.x = npcPortChatZones[0].position.x;
+  portNPCS.position.y = npcPortChatZones[0].position.y;
+}
+
 // DRAW BORDERS FOR COLLISIONS
 
 const portCollisionMap = [];
@@ -152,13 +238,31 @@ portCollisionMap.forEach((row, i) => {
 //
 const portMovers = [
   portWorldBg,
+
   ...boundari,
   ...exitPortZones,
   ...enterWebZones,
   ...enterWebTwoZones,
   ...enterWebThreeZones,
   ...enterWebFourZones,
+  portNPCS,
+  ...npcPortChatZones,
+  portFGS,
+  ...charSetZones,
 ];
+
+let portDialoges = [
+  'Welcome to the Portfolio!',
+  'I am the Portfolio Manager!',
+  'Step on the carpets to enter!',
+];
+
+function npcPortChat() {
+  chat.innerHTML = portDialoges[0];
+
+  // setInterval to change portDialoges
+}
+
 let url;
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
 width=0,height=0,left=-1000,top=-1000`;
@@ -183,10 +287,18 @@ const playerLocation = () => {
 
 function animatePort() {
   const portAniID = window.requestAnimationFrame(animatePort);
+
   portWorldBg.draw();
+
+  portNPCS.draw();
 
   // DRAW PLAYER
   player.draw();
+
+  // npc chat
+  npcPortChatZones.forEach((zone) => {
+    zone.draw();
+  });
 
   // DRAW BOUNDARY
   boundari.forEach((boundary) => {
@@ -197,6 +309,10 @@ function animatePort() {
   // DRAW exit ZONES
   exitPortZones.forEach((exitZone) => {
     exitZone.draw();
+  });
+  // draw charset zones
+  charSetZones.forEach((charSetZone) => {
+    charSetZone.draw();
   });
   // DRAW ENTER WEB ZONES
   // ONE
@@ -215,6 +331,9 @@ function animatePort() {
   enterWebFourZones.forEach((webZone) => {
     webZone.draw();
   });
+
+  // foreground
+  portFGS.draw();
 
   let mova = true;
 
@@ -264,6 +383,7 @@ function animatePort() {
                 duration: 0.4,
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
+                  port = false;
                   audio.House.stop();
                   animate();
                   gsap.to('#transition', {
@@ -276,6 +396,38 @@ function animatePort() {
           });
         }
         break;
+      }
+    }
+  }
+
+  // // NPC ZONE DETECTION & CHAT ACTIVATION
+  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+    for (let i = 0; i < npcPortChatZones.length; i++) {
+      const npcZone = npcPortChatZones[i];
+
+      const overlappingArea =
+        (Math.min(
+          player.position.x + player.width,
+          npcZone.position.x + npcZone.width
+        ) -
+          Math.max(player.position.x, npcZone.position.x)) *
+        (Math.min(
+          player.position.y + player.height,
+          npcZone.position.y + npcZone.height
+        ) -
+          Math.max(player.position.y, npcZone.position.y));
+
+      if (
+        rectCollision({
+          rect1: player,
+          rect2: npcZone,
+        }) &&
+        overlappingArea > (player.width * player.height) / 4
+      ) {
+        npcPortChat();
+        chatBoxHtml.style.display = 'flex';
+      } else {
+        chatBoxHtml.style.display = 'none';
       }
     }
   }

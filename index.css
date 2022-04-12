@@ -399,4 +399,7 @@ body {
   button {
     font-size: 0.6rem !important;
   }
+  #npcChat {
+    font-size: 0.6rem;
+  }
 }

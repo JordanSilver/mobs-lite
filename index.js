@@ -32,6 +32,9 @@ if (mobile) {
   };
 }
 
+// "STATE"
+let port = false;
+
 // DRAW BATTLE ZONES
 
 const battleZonesMap = [];
@@ -401,7 +404,7 @@ function animate() {
                 duration: 0.4,
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
-
+                  port = true;
                   audio.House.play();
                   animatePort();
                   gsap.to('#transition', {
