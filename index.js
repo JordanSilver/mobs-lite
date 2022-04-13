@@ -105,6 +105,9 @@ enterHouseMap.forEach((row, i) => {
   });
 });
 
+console.log(houseZones);
+// set player start to enter house zone[0]
+
 // DRAW BORDERS FOR COLLISIONS
 
 const collisionsMap = [];
@@ -191,6 +194,9 @@ const keys = {
     pressed: false,
   },
   d: {
+    pressed: false,
+  },
+  x: {
     pressed: false,
   },
 };
@@ -648,6 +654,12 @@ window.addEventListener('keydown', (e) => {
       };
       lastKey = 'd';
       break;
+    case 'x':
+      keys.x = {
+        pressed: true,
+      };
+      lastKey = 'x';
+      break;
     // arrow keys
     case 'ArrowUp':
       keys.w = {
@@ -761,6 +773,9 @@ function handleTouchEnd(evt) {
   keys.d = {
     pressed: false,
   };
+  keys.x = {
+    pressed: false,
+  };
 }
 
 gameLeft.addEventListener('touchstart', () => {
@@ -815,6 +830,10 @@ window.addEventListener('keyup', (e) => {
         pressed: false,
       };
       break;
+    case 'x':
+      keys.x = {
+        pressed: false,
+      };
     // arrow keys
     case 'ArrowUp':
       keys.w = {

@@ -102,7 +102,7 @@ enterWebMap.forEach((row, i) => {
 const arrowOne = new Sprite({
   position: {
     x: enterWebZones[1].position.x,
-    y: enterWebZones[1].position.y - 25,
+    y: enterWebZones[1].position.y - 45,
   },
   image: portArrows,
   frames: {
@@ -142,8 +142,8 @@ enterWebMapTwo.forEach((row, i) => {
 
 const arrowTwo = new Sprite({
   position: {
-    x: enterWebTwoZones[1].position.x,
-    y: enterWebTwoZones[1].position.y - 25,
+    x: enterWebTwoZones[1].position.x + 45,
+    y: enterWebTwoZones[1].position.y - 45,
   },
   image: portArrows,
   frames: {
@@ -182,7 +182,7 @@ enterWebMapThree.forEach((row, i) => {
 const arrowThree = new Sprite({
   position: {
     x: enterWebThreeZones[0].position.x,
-    y: enterWebThreeZones[0].position.y - 25,
+    y: enterWebThreeZones[0].position.y - 45,
   },
   image: portArrows,
   frames: {
@@ -222,7 +222,7 @@ enterWebMapFour.forEach((row, i) => {
 const arrowFour = new Sprite({
   position: {
     x: enterWebFourZones[0].position.x,
-    y: enterWebFourZones[0].position.y - 25,
+    y: enterWebFourZones[0].position.y - 45,
   },
   image: portArrows,
   frames: {
@@ -338,8 +338,7 @@ let portDialoges = [
 
 function npcPortChat() {
   chat.innerHTML = portDialoges[0];
-
-  // setInterval to change portDialoges
+  // change to portDialoges[1] after 4 seconds and add css type animation
 }
 
 let url;
@@ -404,8 +403,8 @@ function animatePort() {
   enterWebThreeZones.forEach((webZone) => {
     webZone.draw();
     if (
-      player.position.x > webZone.position.x - 150 &&
-      player.position.x < webZone.position.x + 150 &&
+      player.position.x > webZone.position.x - 250 &&
+      player.position.x < webZone.position.x + 250 &&
       player.position.y > webZone.position.y - 150 &&
       player.position.y < webZone.position.y + 150
     ) {
@@ -417,8 +416,8 @@ function animatePort() {
   enterWebFourZones.forEach((webZone) => {
     webZone.draw();
     if (
-      player.position.x > webZone.position.x - 200 &&
-      player.position.x < webZone.position.x + 200 &&
+      player.position.x > webZone.position.x - 250 &&
+      player.position.x < webZone.position.x + 250 &&
       player.position.y > webZone.position.y - 150 &&
       player.position.y < webZone.position.y + 150
     ) {
@@ -516,7 +515,7 @@ function animatePort() {
           rect1: player,
           rect2: npcZone,
         }) &&
-        overlappingArea > (player.width * player.height) / 4
+        overlappingArea > (player.width - 100 * player.height - 100) / 2
       ) {
         npcPortChat();
 
@@ -721,7 +720,7 @@ function animatePort() {
         overlappingArea > (player.width * player.height) / 4
       ) {
         // DEACTIVATE CURRENT ANIMATION LOOP
-        if (keys.w.pressed) {
+        if (keys.x.pressed) {
           gsap.to('#transition', {
             opacity: 1,
             repeat: 1,
