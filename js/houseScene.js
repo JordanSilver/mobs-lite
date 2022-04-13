@@ -102,7 +102,7 @@ const npcChatZones = [];
 
 npcCollisionMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
-    if (symbol === 1) {
+    if (symbol === 404) {
       npcChatZones.push(
         new Boundary({
           position: {
