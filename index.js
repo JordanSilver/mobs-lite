@@ -576,6 +576,8 @@ function startScreen() {
 
           animate();
 
+          // animatePort();
+
           document.querySelector('#start-screen').style.display = 'none';
         },
       });

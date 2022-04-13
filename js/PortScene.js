@@ -44,6 +44,9 @@ const portNPCS = new Monster({
   },
 });
 
+const portArrows = new Image();
+portArrows.src = './img/port-arrows.png';
+
 // port map speed
 let portSpeed = 7;
 
@@ -93,6 +96,25 @@ enterWebMap.forEach((row, i) => {
     }
   });
 });
+
+// spot one arrow
+
+const arrowOne = new Sprite({
+  position: {
+    x: enterWebZones[1].position.x,
+    y: enterWebZones[1].position.y - 25,
+  },
+  image: portArrows,
+  frames: {
+    max: 4,
+    hold: 15,
+  },
+  animate: true,
+  sprites: {
+    down: portArrows,
+  },
+});
+
 // SPOT TWO
 const enterWebMapTwo = [];
 for (let i = 0; i < enterWeb2Data.length; i += 70) {
@@ -115,6 +137,25 @@ enterWebMapTwo.forEach((row, i) => {
     }
   });
 });
+
+// spot two arrow
+
+const arrowTwo = new Sprite({
+  position: {
+    x: enterWebTwoZones[1].position.x,
+    y: enterWebTwoZones[1].position.y - 25,
+  },
+  image: portArrows,
+  frames: {
+    max: 4,
+    hold: 15,
+  },
+  animate: true,
+  sprites: {
+    down: portArrows,
+  },
+});
+
 // SPOT Three
 const enterWebMapThree = [];
 for (let i = 0; i < enterWeb3Data.length; i += 70) {
@@ -137,6 +178,23 @@ enterWebMapThree.forEach((row, i) => {
     }
   });
 });
+// spot three arrow
+const arrowThree = new Sprite({
+  position: {
+    x: enterWebThreeZones[0].position.x,
+    y: enterWebThreeZones[0].position.y - 25,
+  },
+  image: portArrows,
+  frames: {
+    max: 4,
+    hold: 15,
+  },
+  animate: true,
+  sprites: {
+    down: portArrows,
+  },
+});
+
 // SPOT Four
 const enterWebMapFour = [];
 for (let i = 0; i < enterWeb4Data.length; i += 70) {
@@ -158,6 +216,23 @@ enterWebMapFour.forEach((row, i) => {
       );
     }
   });
+});
+
+// spot four arrow
+const arrowFour = new Sprite({
+  position: {
+    x: enterWebFourZones[0].position.x,
+    y: enterWebFourZones[0].position.y - 25,
+  },
+  image: portArrows,
+  frames: {
+    max: 4,
+    hold: 15,
+  },
+  animate: true,
+  sprites: {
+    down: portArrows,
+  },
 });
 
 // char set
@@ -249,6 +324,10 @@ const portMovers = [
   ...npcPortChatZones,
   portFGS,
   ...charSetZones,
+  arrowOne,
+  arrowTwo,
+  arrowThree,
+  arrowFour,
 ];
 
 let portDialoges = [
@@ -266,24 +345,6 @@ function npcPortChat() {
 let url;
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
 width=0,height=0,left=-1000,top=-1000`;
-const playerLocation = () => {
-  if (portWorldBg.position.x >= -300 && portWorldBg.position.y >= -600) {
-    url = 'https://tagpainting.com';
-  } else if (portWorldBg.position.x >= -300 && portWorldBg.position.y <= -900) {
-    url = 'https://nxt-crypto.netlify.app/';
-  } else if (
-    portWorldBg.position.x <= -1000 &&
-    portWorldBg.position.y >= -600
-  ) {
-    url = 'http://beastmodebattles.herokuapp.com/';
-  } else if (
-    portWorldBg.position.x <= -1000 &&
-    portWorldBg.position.y >= -900
-  ) {
-    url = 'https://exiva-me.vercel.app/';
-  }
-  setTimeout(() => window.open(url, params), 200);
-};
 
 function animatePort() {
   const portAniID = window.requestAnimationFrame(animatePort);
@@ -318,18 +379,51 @@ function animatePort() {
   // ONE
   enterWebZones.forEach((webZone) => {
     webZone.draw();
+    if (
+      player.position.x > webZone.position.x - 250 &&
+      player.position.x < webZone.position.x + 250 &&
+      player.position.y > webZone.position.y - 150 &&
+      player.position.y < webZone.position.y + 150
+    ) {
+      arrowOne.draw();
+    }
   });
   // TWO
   enterWebTwoZones.forEach((webZone) => {
     webZone.draw();
+    if (
+      player.position.x > webZone.position.x - 250 &&
+      player.position.x < webZone.position.x + 250 &&
+      player.position.y > webZone.position.y - 150 &&
+      player.position.y < webZone.position.y + 150
+    ) {
+      arrowTwo.draw();
+    }
   });
   // Three
   enterWebThreeZones.forEach((webZone) => {
     webZone.draw();
+    if (
+      player.position.x > webZone.position.x - 150 &&
+      player.position.x < webZone.position.x + 150 &&
+      player.position.y > webZone.position.y - 150 &&
+      player.position.y < webZone.position.y + 150
+    ) {
+      arrowThree.draw();
+    }
   });
+
   // Four
   enterWebFourZones.forEach((webZone) => {
     webZone.draw();
+    if (
+      player.position.x > webZone.position.x - 200 &&
+      player.position.x < webZone.position.x + 200 &&
+      player.position.y > webZone.position.y - 150 &&
+      player.position.y < webZone.position.y + 150
+    ) {
+      arrowFour.draw();
+    }
   });
 
   // foreground
@@ -368,7 +462,7 @@ function animatePort() {
         overlappingArea > (player.width * player.height) / 4
       ) {
         // DEACTIVATE CURRENT ANIMATION LOOP
-        if (keys.w.pressed) {
+        if (keys.s.pressed) {
           window.cancelAnimationFrame(portAniID);
           audio.tackleHit.play();
           audio.Map.play();
@@ -425,6 +519,7 @@ function animatePort() {
         overlappingArea > (player.width * player.height) / 4
       ) {
         npcPortChat();
+
         chatBoxHtml.style.display = 'flex';
       } else {
         chatBoxHtml.style.display = 'none';
@@ -601,7 +696,7 @@ function animatePort() {
       }
     }
   }
-  // // WEB THREE ZONE DETECTION
+  // // WEB Four ZONE DETECTION
   if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
     for (let i = 0; i < enterWebFourZones.length; i++) {
       const webZone = enterWebFourZones[i];
