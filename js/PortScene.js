@@ -116,7 +116,7 @@ enterWebMap.forEach((row, i) => {
 
 const arrowOne = new Sprite({
   position: {
-    x: enterWebZones[1].position.x,
+    x: enterWebZones[1].position.x + 35,
     y: enterWebZones[1].position.y - 45,
   },
   image: portArrows,
@@ -401,14 +401,20 @@ function animatePort() {
       arrowOne.draw();
     }
     if (
-      player.position.x > webZone.position.x - 50 &&
-      player.position.x < webZone.position.x + 50 &&
-      player.position.y > webZone.position.y - 50 &&
-      player.position.y < webZone.position.y + 50
+      player.position.x > webZone.position.x - 75 &&
+      player.position.x < webZone.position.x + 75 &&
+      player.position.y > webZone.position.y - 75 &&
+      player.position.y < webZone.position.y + 75
     ) {
-      enterOne.style.opacity = 1;
+      gsap.to(enterOne, {
+        duration: 0.5,
+        opacity: 1,
+      });
     } else {
-      enterOne.style.opacity = 0;
+      gsap.to(enterOne, {
+        duration: 0.5,
+        opacity: 0,
+      });
     }
   });
   // TWO
@@ -423,14 +429,20 @@ function animatePort() {
       arrowTwo.draw();
     }
     if (
-      player.position.x > webZone.position.x - 50 &&
-      player.position.x < webZone.position.x + 50 &&
-      player.position.y > webZone.position.y - 50 &&
-      player.position.y < webZone.position.y + 50
+      player.position.x > webZone.position.x - 75 &&
+      player.position.x < webZone.position.x + 75 &&
+      player.position.y > webZone.position.y - 75 &&
+      player.position.y < webZone.position.y + 75
     ) {
-      enterTwo.style.opacity = 1;
+      gsap.to(enterTwo, {
+        duration: 0.5,
+        opacity: 1,
+      });
     } else {
-      enterTwo.style.opacity = 0;
+      gsap.to(enterTwo, {
+        duration: 0.5,
+        opacity: 0,
+      });
     }
   });
   // Three
@@ -445,14 +457,20 @@ function animatePort() {
       arrowThree.draw();
     }
     if (
-      player.position.x > webZone.position.x - 50 &&
-      player.position.x < webZone.position.x + 50 &&
-      player.position.y > webZone.position.y - 50 &&
-      player.position.y < webZone.position.y + 50
+      player.position.x > webZone.position.x - 75 &&
+      player.position.x < webZone.position.x + 75 &&
+      player.position.y > webZone.position.y - 75 &&
+      player.position.y < webZone.position.y + 75
     ) {
-      enterThree.style.opacity = 1;
+      gsap.to(enterThree, {
+        duration: 0.5,
+        opacity: 1,
+      });
     } else {
-      enterThree.style.opacity = 0;
+      gsap.to(enterThree, {
+        duration: 0.5,
+        opacity: 0,
+      });
     }
   });
 
@@ -473,9 +491,15 @@ function animatePort() {
       player.position.y > webZone.position.y - 75 &&
       player.position.y < webZone.position.y + 75
     ) {
-      enterFour.style.opacity = 1;
+      gsap.to(enterFour, {
+        duration: 0.5,
+        opacity: 1,
+      });
     } else {
-      enterFour.style.opacity = 0;
+      gsap.to(enterFour, {
+        duration: 0.5,
+        opacity: 0,
+      });
     }
   });
 
