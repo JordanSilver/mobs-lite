@@ -5,12 +5,7 @@ const gameUp = document.querySelector('#game-button-up');
 const gameDown = document.querySelector('#game-button-down');
 const gameLeft = document.querySelector('#game-button-left');
 const gameRight = document.querySelector('#game-button-right');
-const pressX = document.querySelector('#press-x');
 
-pressX.addEventListener('click', () => {
-  pressX.style.display = 'none';
-  alert('Be careful!');
-});
 // find mobile size
 const mobile = window.innerWidth < 768;
 // set size
@@ -542,6 +537,11 @@ let clicked = false;
 window.addEventListener('click', () => {
   if (!clicked) {
     audio.Map.play();
+
+    gsap.to(startImg, {
+      opacity: 1,
+      duration: 0.4,
+    });
     clicked = true;
   }
 });

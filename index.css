@@ -196,17 +196,20 @@ body {
   display: none;
 }
 #start-hero {
-  opacity: 1;
+  opacity: 0;
 }
-#press-x {
-  position: absolute;
-  bottom: 0rem;
-  left: 1rem;
-  background-color: rgba(0, 0, 0, 0.65);
-  padding: 0.2rem;
-  border-radius: 4px;
+.press-x {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 0rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
   border: 1px solid white;
-  opacity: 1;
+  opacity: 0;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  z-index: 400;
+  cursor: pointer;
 }
 
 #npcChatBox {

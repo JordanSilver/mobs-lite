@@ -72,6 +72,21 @@ exitPortMap.forEach((row, i) => {
     }
   });
 });
+const enterOne = document.querySelector('#enterBtn-1');
+const enterTwo = document.querySelector('#enterBtn-2');
+const enterThree = document.querySelector('#enterBtn-3');
+const enterFour = document.querySelector('#enterBtn-4');
+const pressX = document.querySelectorAll('.press-x');
+
+pressX.forEach((x) => {
+  x.addEventListener('touchstart', () => {
+    keys.x.pressed = true;
+    lastKey = 'x';
+  });
+  x.addEventListener('touchend', () => {
+    keys.x.pressed = false;
+  });
+});
 
 // DRAW Enter WEB BARRIER
 // SPOT ONE
@@ -332,13 +347,12 @@ const portMovers = [
 
 let portDialoges = [
   'Welcome to the Portfolio!',
-  'I am the Portfolio Manager!',
+
   'Step on the carpets to enter!',
 ];
 
 function npcPortChat() {
   chat.innerHTML = portDialoges[0];
-  // change to portDialoges[1] after 4 seconds and add css type animation
 }
 
 let url;
@@ -386,6 +400,16 @@ function animatePort() {
     ) {
       arrowOne.draw();
     }
+    if (
+      player.position.x > webZone.position.x - 50 &&
+      player.position.x < webZone.position.x + 50 &&
+      player.position.y > webZone.position.y - 50 &&
+      player.position.y < webZone.position.y + 50
+    ) {
+      enterOne.style.opacity = 1;
+    } else {
+      enterOne.style.opacity = 0;
+    }
   });
   // TWO
   enterWebTwoZones.forEach((webZone) => {
@@ -397,6 +421,16 @@ function animatePort() {
       player.position.y < webZone.position.y + 150
     ) {
       arrowTwo.draw();
+    }
+    if (
+      player.position.x > webZone.position.x - 50 &&
+      player.position.x < webZone.position.x + 50 &&
+      player.position.y > webZone.position.y - 50 &&
+      player.position.y < webZone.position.y + 50
+    ) {
+      enterTwo.style.opacity = 1;
+    } else {
+      enterTwo.style.opacity = 0;
     }
   });
   // Three
@@ -410,6 +444,16 @@ function animatePort() {
     ) {
       arrowThree.draw();
     }
+    if (
+      player.position.x > webZone.position.x - 50 &&
+      player.position.x < webZone.position.x + 50 &&
+      player.position.y > webZone.position.y - 50 &&
+      player.position.y < webZone.position.y + 50
+    ) {
+      enterThree.style.opacity = 1;
+    } else {
+      enterThree.style.opacity = 0;
+    }
   });
 
   // Four
@@ -422,6 +466,16 @@ function animatePort() {
       player.position.y < webZone.position.y + 150
     ) {
       arrowFour.draw();
+    }
+    if (
+      player.position.x > webZone.position.x - 75 &&
+      player.position.x < webZone.position.x + 75 &&
+      player.position.y > webZone.position.y - 75 &&
+      player.position.y < webZone.position.y + 75
+    ) {
+      enterFour.style.opacity = 1;
+    } else {
+      enterFour.style.opacity = 0;
     }
   });
 
@@ -527,7 +581,7 @@ function animatePort() {
   }
 
   // // WEB ZONE DETECTION
-  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+  if (keys.x.pressed) {
     for (let i = 0; i < enterWebZones.length; i++) {
       const webZone = enterWebZones[i];
 
@@ -551,7 +605,7 @@ function animatePort() {
         overlappingArea > (player.width * player.height) / 4
       ) {
         // DEACTIVATE CURRENT ANIMATION LOOP
-        if (keys.w.pressed) {
+        if (keys.x.pressed) {
           gsap.to('#transition', {
             opacity: 1,
             repeat: 1,
@@ -583,122 +637,9 @@ function animatePort() {
     }
   }
   // // WEB TWO ZONE DETECTION
-  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
+  if (keys.x.pressed) {
     for (let i = 0; i < enterWebTwoZones.length; i++) {
       const webZone = enterWebTwoZones[i];
-
-      const overlappingArea =
-        (Math.min(
-          player.position.x + player.width,
-          webZone.position.x + webZone.width
-        ) -
-          Math.max(player.position.x, webZone.position.x)) *
-        (Math.min(
-          player.position.y + player.height,
-          webZone.position.y + webZone.height
-        ) -
-          Math.max(player.position.y, webZone.position.y));
-
-      if (
-        rectCollision({
-          rect1: player,
-          rect2: webZone,
-        }) &&
-        overlappingArea > (player.width * player.height) / 4
-      ) {
-        // DEACTIVATE CURRENT ANIMATION LOOP
-        if (keys.w.pressed) {
-          gsap.to('#transition', {
-            opacity: 1,
-            repeat: 1,
-            yoyo: true,
-            duration: 0.2,
-            onComplete() {
-              gsap.to('#transition', {
-                opacity: 1,
-                duration: 0.4,
-                onComplete() {
-                  // ACTIVE NEW ANIMATION LOOP
-                  audio.House.stop();
-                  setTimeout(
-                    () =>
-                      window.open('https://nxt-crypto.netlify.app/', params),
-                    200
-                  );
-
-                  gsap.to('#transition', {
-                    opacity: 0,
-                    duration: 0.4,
-                  });
-                },
-              });
-            },
-          });
-        }
-        break;
-      }
-    }
-  }
-  // // WEB THREE ZONE DETECTION
-  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
-    for (let i = 0; i < enterWebThreeZones.length; i++) {
-      const webZone = enterWebThreeZones[i];
-
-      const overlappingArea =
-        (Math.min(
-          player.position.x + player.width,
-          webZone.position.x + webZone.width
-        ) -
-          Math.max(player.position.x, webZone.position.x)) *
-        (Math.min(
-          player.position.y + player.height,
-          webZone.position.y + webZone.height
-        ) -
-          Math.max(player.position.y, webZone.position.y));
-
-      if (
-        rectCollision({
-          rect1: player,
-          rect2: webZone,
-        }) &&
-        overlappingArea > (player.width * player.height) / 4
-      ) {
-        // DEACTIVATE CURRENT ANIMATION LOOP
-        if (keys.w.pressed) {
-          gsap.to('#transition', {
-            opacity: 1,
-            repeat: 1,
-            yoyo: true,
-            duration: 0.2,
-            onComplete() {
-              gsap.to('#transition', {
-                opacity: 1,
-                duration: 0.4,
-                onComplete() {
-                  // ACTIVE NEW ANIMATION LOOP
-                  audio.House.stop();
-                  setTimeout(
-                    () => window.open('https://exiva-me.vercel.app/', params),
-                    200
-                  );
-
-                  gsap.to('#transition', {
-                    opacity: 0,
-                    duration: 0.4,
-                  });
-                },
-              });
-            },
-          });
-        }
-        break;
-      }
-    }
-  }
-  // // WEB Four ZONE DETECTION
-  if (keys.w.pressed || keys.a.pressed || keys.s.pressed || keys.d.pressed) {
-    for (let i = 0; i < enterWebFourZones.length; i++) {
-      const webZone = enterWebFourZones[i];
 
       const overlappingArea =
         (Math.min(
@@ -735,10 +676,7 @@ function animatePort() {
                   audio.House.stop();
                   setTimeout(
                     () =>
-                      window.open(
-                        'http://beastmodebattles.herokuapp.com/',
-                        params
-                      ),
+                      window.open('https://nxt-crypto.netlify.app/', params),
                     200
                   );
 
@@ -751,6 +689,123 @@ function animatePort() {
             },
           });
         }
+
+        break;
+      }
+    }
+  }
+  // // WEB THREE ZONE DETECTION
+
+  for (let i = 0; i < enterWebThreeZones.length; i++) {
+    const webZone = enterWebThreeZones[i];
+
+    const overlappingArea =
+      (Math.min(
+        player.position.x + player.width,
+        webZone.position.x + webZone.width
+      ) -
+        Math.max(player.position.x, webZone.position.x)) *
+      (Math.min(
+        player.position.y + player.height,
+        webZone.position.y + webZone.height
+      ) -
+        Math.max(player.position.y, webZone.position.y));
+
+    if (
+      rectCollision({
+        rect1: player,
+        rect2: webZone,
+      }) &&
+      overlappingArea > (player.width * player.height) / 16
+    ) {
+      if (keys.x.pressed) {
+        // DEACTIVATE CURRENT ANIMATION LOOP
+        gsap.to('#transition', {
+          opacity: 1,
+          repeat: 1,
+          yoyo: true,
+          duration: 0.2,
+          onComplete() {
+            gsap.to('#transition', {
+              opacity: 1,
+              duration: 0.4,
+              onComplete() {
+                // ACTIVE NEW ANIMATION LOOP
+                audio.House.stop();
+                setTimeout(
+                  () => window.open('https://exiva-me.vercel.app/', params),
+                  200
+                );
+
+                gsap.to('#transition', {
+                  opacity: 0,
+                  duration: 0.4,
+                });
+              },
+            });
+          },
+        });
+        break;
+      }
+    }
+  }
+
+  // // WEB Four ZONE DETECTION
+
+  for (let i = 0; i < enterWebFourZones.length; i++) {
+    const webZone = enterWebFourZones[i];
+
+    const overlappingArea =
+      (Math.min(
+        player.position.x + player.width,
+        webZone.position.x + webZone.width
+      ) -
+        Math.max(player.position.x, webZone.position.x)) *
+      (Math.min(
+        player.position.y + player.height,
+        webZone.position.y + webZone.height
+      ) -
+        Math.max(player.position.y, webZone.position.y));
+
+    if (
+      rectCollision({
+        rect1: player,
+        rect2: webZone,
+      }) &&
+      overlappingArea > (player.width * player.height) / 4
+    ) {
+      // DEACTIVATE CURRENT ANIMATION LOOP
+
+      if (keys.x.pressed) {
+        gsap.to('#transition', {
+          opacity: 1,
+          repeat: 1,
+          yoyo: true,
+          duration: 0.2,
+          onComplete() {
+            gsap.to('#transition', {
+              opacity: 1,
+              duration: 0.4,
+              onComplete() {
+                // ACTIVE NEW ANIMATION LOOP
+                audio.House.stop();
+                setTimeout(
+                  () =>
+                    window.open(
+                      'http://beastmodebattles.herokuapp.com/',
+                      params
+                    ),
+                  200
+                );
+
+                gsap.to('#transition', {
+                  opacity: 0,
+                  duration: 0.4,
+                });
+              },
+            });
+          },
+        });
         break;
       }
     }
