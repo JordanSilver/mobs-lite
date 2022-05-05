@@ -805,40 +805,32 @@ function handleTouchEnd(evt) {
   };
 }
 
-gameLeft.addEventListener('touchstart', (e) => {
-  e.preventDefault();
+gameLeft.addEventListener('touchstart', () => {
   keys.a.pressed = true;
   lastKey = 'a';
 });
-gameLeft.addEventListener('touchend', (e) => {
-  e.preventDefault();
+gameLeft.addEventListener('touchend', () => {
   keys.a.pressed = false;
 });
-gameRight.addEventListener('touchstart', (e) => {
-  e.preventDefault();
+gameRight.addEventListener('touchstart', () => {
   keys.d.pressed = true;
   lastKey = 'd';
 });
-gameRight.addEventListener('touchend', (e) => {
-  e.preventDefault();
+gameRight.addEventListener('touchend', () => {
   keys.d.pressed = false;
 });
-gameUp.addEventListener('touchstart', (e) => {
-  e.preventDefault();
+gameUp.addEventListener('touchstart', () => {
   keys.w.pressed = true;
   lastKey = 'w';
 });
-gameUp.addEventListener('touchend', (e) => {
-  e.preventDefault();
+gameUp.addEventListener('touchend', () => {
   keys.w.pressed = false;
 });
-gameDown.addEventListener('touchstart', (e) => {
-  e.preventDefault();
+gameDown.addEventListener('touchstart', () => {
   keys.s.pressed = true;
   lastKey = 's';
 });
-gameDown.addEventListener('touchend', (e) => {
-  e.preventDefault();
+gameDown.addEventListener('touchend', () => {
   keys.s.pressed = false;
 });
 
