@@ -6,6 +6,8 @@ const gameDown = document.querySelector('#game-button-down');
 const gameLeft = document.querySelector('#game-button-left');
 const gameRight = document.querySelector('#game-button-right');
 
+let muted = false;
+
 // find mobile size
 const mobile = window.innerWidth < 768;
 // set size
@@ -285,8 +287,10 @@ function animate() {
         window.cancelAnimationFrame(animationID);
         document.querySelector('#game-btn').style.display = 'none';
         audio.Map.stop();
-        audio.initBattle.play();
-        audio.battle.play();
+        if (!muted) {
+          audio.initBattle.play();
+          audio.battle.play();
+        }
         battle.initiated = true;
         gsap.to('#transition', {
           opacity: 1,
@@ -342,7 +346,7 @@ function animate() {
         if (keys.w.pressed) {
           window.cancelAnimationFrame(animationID);
           audio.Map.stop();
-          audio.tackleHit.play();
+          if (!muted) audio.tackleHit.play();
           gsap.to('#transition', {
             opacity: 1,
             repeat: 1,
@@ -354,8 +358,8 @@ function animate() {
                 duration: 0.4,
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
+                  if (!muted) audio.House.play();
 
-                  audio.House.play();
                   animateHouse();
                   gsap.to('#transition', {
                     opacity: 0,
@@ -399,7 +403,7 @@ function animate() {
         if (keys.w.pressed) {
           window.cancelAnimationFrame(animationID);
           audio.Map.stop();
-          audio.tackleHit.play();
+          if (!muted) audio.tackleHit.play();
           gsap.to('#transition', {
             opacity: 1,
             repeat: 1,
@@ -412,7 +416,7 @@ function animate() {
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
                   port = true;
-                  audio.House.play();
+                  if (!muted) audio.House.play();
                   animatePort();
                   gsap.to('#transition', {
                     opacity: 0,
@@ -531,9 +535,11 @@ const tapStart = document.querySelector('#tap-start');
 const startBtn = document.querySelector('#start-btn');
 const loading = document.querySelector('#loading');
 const startHud = document.querySelector('#start-hud');
+const audioBtn = document.querySelector('#audio-btn');
 const typeEffect = document.querySelector('#type-effect-loading');
 const startImg = document.querySelector('#start-hero');
 let clicked = false;
+
 window.addEventListener('click', () => {
   if (!clicked) {
     audio.Map.play();
@@ -546,6 +552,16 @@ window.addEventListener('click', () => {
   }
 });
 
+audioBtn.addEventListener('click', () => {
+  // disable audio if audio button
+  muted = !muted;
+  if (muted) {
+    audio.Map.stop();
+  } else {
+    audio.Map.play();
+  }
+  console.log(muted);
+});
 // typewriter effect for typeEffect
 const typeEffectText = typeEffect.innerHTML;
 let typeEffectIndex = 0;
@@ -566,7 +582,12 @@ let tapStartTimer = setInterval(() => {
     }, 500);
   } else {
     clearInterval(tapStartTimer);
-    gsap.to('#start-hud', {
+    gsap.to(startHud, {
+      translateY: '0%',
+      duration: 0.4,
+      opacity: 1,
+    });
+    gsap.to(audioBtn, {
       translateY: '0%',
       duration: 0.4,
       opacity: 1,
@@ -586,9 +607,9 @@ function startScreen() {
         onComplete() {
           //  THIS ANIMATE STARTS THE GAME \\
 
-          animate();
+          // animate();
 
-          // animatePort();
+          animatePort();
 
           document.querySelector('#start-screen').style.display = 'none';
         },

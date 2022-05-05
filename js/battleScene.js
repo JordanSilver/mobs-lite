@@ -68,7 +68,7 @@ function initBattle() {
               });
               battle.initiated = false;
               audio.battle.stop();
-              audio.Map.play();
+              if (!muted) audio.Map.play();
             },
           });
         });

@@ -541,8 +541,10 @@ function animatePort() {
         // DEACTIVATE CURRENT ANIMATION LOOP
         if (keys.s.pressed) {
           window.cancelAnimationFrame(portAniID);
-          audio.tackleHit.play();
-          audio.Map.play();
+          if (!muted) {
+            audio.tackleHit.play();
+            audio.Map.play();
+          }
           gsap.to('#transition', {
             opacity: 1,
             repeat: 1,
