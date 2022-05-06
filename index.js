@@ -535,7 +535,10 @@ const tapStart = document.querySelector('#tap-start');
 const startBtn = document.querySelector('#start-btn');
 const loading = document.querySelector('#loading');
 const startHud = document.querySelector('#start-hud');
+const optionsScreen = document.querySelector('#options-screen');
 const audioBtn = document.querySelector('#audio-btn');
+const optionsBtn = document.querySelector('#options-btn');
+const closeOpts = document.querySelector('#close-opts');
 const typeEffect = document.querySelector('#type-effect-loading');
 const startImg = document.querySelector('#start-hero');
 let clicked = false;
@@ -551,16 +554,77 @@ window.addEventListener('click', () => {
     clicked = true;
   }
 });
+audioBtn.classList.add('bi');
+audioBtn.classList.add('bi-speaker');
+optionsBtn.classList.add('bi');
+optionsBtn.classList.add('bi-info-circle');
+closeOpts.classList.add('bi');
+closeOpts.classList.add('bi-x-circle');
+
+optionsBtn.addEventListener('click', () => {
+  console.log('click');
+  gsap.to(optionsBtn, {
+    scale: 0.8,
+    duration: 0.2,
+    onComplete() {
+      gsap.to(optionsBtn, {
+        scale: 1.2,
+        duration: 0.1,
+        onComplete() {
+          gsap.to(optionsBtn, {
+            scale: 1,
+            duration: 0.1,
+          });
+          gsap.to(optionsScreen, {
+            opacity: 1,
+            transform: 'translateY(0)',
+            duration: 0.4,
+          });
+        },
+      });
+    },
+  });
+});
+closeOpts.addEventListener('click', () => {
+  gsap.to(optionsScreen, {
+    opacity: 0,
+    transform: 'translateY(-100%)',
+    duration: 0.4,
+  });
+});
 
 audioBtn.addEventListener('click', () => {
   // disable audio if audio button
   muted = !muted;
   if (muted) {
     audio.Map.stop();
+    audioBtn.classList.remove('bi-speaker');
+    audioBtn.classList.add('bi-speaker-fill');
+    gsap.to(audioBtn, {
+      duration: 0.1,
+      scale: 0.8,
+      onComplete() {
+        gsap.to(audioBtn, {
+          duration: 0.1,
+          scale: 1,
+        });
+      },
+    });
   } else {
     audio.Map.play();
+    audioBtn.classList.remove('bi-speaker-fill');
+    audioBtn.classList.add('bi-speaker');
+    gsap.to(audioBtn, {
+      duration: 0.1,
+      scale: 0.8,
+      onComplete() {
+        gsap.to(audioBtn, {
+          duration: 0.1,
+          scale: 1,
+        });
+      },
+    });
   }
-  console.log(muted);
 });
 // typewriter effect for typeEffect
 const typeEffectText = typeEffect.innerHTML;
@@ -587,7 +651,7 @@ let tapStartTimer = setInterval(() => {
       duration: 0.4,
       opacity: 1,
     });
-    gsap.to(audioBtn, {
+    gsap.to(optionsBtn, {
       translateY: '0%',
       duration: 0.4,
       opacity: 1,

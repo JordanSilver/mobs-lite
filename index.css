@@ -192,15 +192,58 @@ body {
   border: rgba(255, 255, 255, 0.95) 1px solid;
 }
 #audio-btn {
-  position: fixed;
+  position: relative;
   top: 2.5rem;
   right: 1.5rem;
+  color: black;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 30;
+  transform: translateY(0%);
+}
+#options-btn {
+  position: fixed;
+  top: 3.5rem;
+  right: 1.5rem;
   color: #000;
-  font-size: 1rem;
+  font-size: 2.5rem;
+  font-weight: 900;
   cursor: pointer;
   z-index: 30;
   transform: translateY(-200%);
   opacity: 0;
+  margin-bottom: 0.5rem;
+}
+#close-opts {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  color: #000;
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 30;
+}
+#options-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 60;
+  background-color: rgba(255, 255, 255, 0.9);
+  opacity: 0;
+  transform: translateY(-200%);
+}
+#options-screen div {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: space-between;
 }
 
 #hud {
