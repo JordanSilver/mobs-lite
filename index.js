@@ -575,7 +575,16 @@ audioBtn.classList.add('bi-speaker');
 optionsBtn.classList.add('bi');
 optionsBtn.classList.add('bi-info-circle');
 closeOpts.classList.add('bi');
-closeOpts.classList.add('bi-x-circle');
+closeOpts.classList.add('bi-gear');
+
+gsap.to(optionsBtn, {
+  // bounce
+  opacity: 1,
+  duration: 0.6,
+  yoyo: true,
+  repeat: -1,
+  ease: 'sine.inOut',
+});
 
 optionsBtn.addEventListener('click', () => {
   console.log('click');
@@ -602,10 +611,28 @@ optionsBtn.addEventListener('click', () => {
   });
 });
 closeOpts.addEventListener('click', () => {
-  gsap.to(optionsScreen, {
-    opacity: 0,
-    transform: 'translateY(-100%)',
-    duration: 0.4,
+  gsap.to(closeOpts, {
+    scale: 0.8,
+    duration: 0.2,
+    onComplete() {
+      gsap.to(closeOpts, {
+        scale: 1.2,
+        duration: 0.1,
+        onComplete() {
+          gsap.to(closeOpts, {
+            scale: 1,
+            duration: 0.1,
+            onComplete() {
+              gsap.to(optionsScreen, {
+                opacity: 0,
+                transform: 'translateY(-100%)',
+                duration: 0.4,
+              });
+            },
+          });
+        },
+      });
+    },
   });
 });
 
