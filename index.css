@@ -494,18 +494,19 @@ body {
 }
 
 #glow-live {
-  font-size: 2rem !important;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 10vh;
   text-align: center;
+
   color: snow;
 }
 
 /* TEXT GLOW */
 #glow-live span {
   font-size: 2rem !important;
+
   -webkit-animation: glow 2s ease-in-out both infinite;
   animation: glow 2s ease-in-out both infinite;
 }
@@ -529,31 +530,31 @@ body {
 @-webkit-keyframes glow {
   0%,
   100% {
-    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px tomato,
-      -25px 25px 50px yellow, 25px 25px 50px tomato;
+    text-shadow: 0 0 8.3333333333px #43b047, 0 -25px 50px #e52521,
+      -25px 25px 50px #fbd00d, 25px 25px 50px #e52521;
   }
   33% {
-    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px cyan,
-      -25px 25px 50px tomato, 25px 25px 50px cyan;
+    text-shadow: 0 0 8.3333333333px #43b047, 0 -25px 50px #618685,
+      -25px 25px 50px #e52521, 25px 25px 50px #618685;
   }
   66% {
-    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px yellow,
-      -25px 25px 50px cyan, 25px 25px 50px yellow;
+    text-shadow: 0 0 8.3333333333px #43b047, 0 -25px 50px #fbd00d,
+      -25px 25px 50px #618685, 25px 25px 50px #fbd00d;
   }
 }
 
 @keyframes glow {
   0%,
   100% {
-    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px tomato,
-      -25px 25px 50px yellow, 25px 25px 50px tomato;
+    text-shadow: 0 0 8.3333333333px #43b047, 0 -25px 50px #e52521,
+      -25px 25px 50px #fbd00d, 25px 25px 50px #e52521;
   }
   33% {
-    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px cyan,
-      -25px 25px 50px tomato, 25px 25px 50px cyan;
+    text-shadow: 0 0 8.3333333333px #43b047, 0 -25px 50px #618685,
+      -25px 25px 50px #e52521, 25px 25px 50px #618685;
   }
   66% {
-    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px yellow,
-      -25px 25px 50px cyan, 25px 25px 50px yellow;
+    text-shadow: 0 0 8.3333333333px #43b047, 0 -25px 50px #fbd00d,
+      -25px 25px 50px #618685, 25px 25px 50px #fbd00d;
   }
 }
