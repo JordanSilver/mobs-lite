@@ -9,7 +9,7 @@ const gameRight = document.querySelector('#game-button-right');
 let muted = false;
 
 // find mobile size
-const mobile = window.innerWidth < 768;
+const mobile = window.innerWidth < 1258;
 // set size
 // canvas.width = 1024;
 // canvas.height = 576;
@@ -34,6 +34,22 @@ if (mobile) {
     y: -900,
   };
 }
+
+// resize window event listener for canvas resize
+window.addEventListener('resize', () => {
+  if (mobile) {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth / 0.9;
+  } else {
+    canvas.width = 1024 * canvasScale;
+    canvas.height = 576 * canvasScale;
+  }
+  offset = {
+    x: -450,
+    y: -900,
+  };
+  draw();
+});
 
 // "STATE"
 let port = false;
