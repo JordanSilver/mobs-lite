@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
+@import 'https://fonts.googleapis.com/css?family=Permanent+Marker';
 * {
   padding: 0;
   margin: 0;
@@ -490,5 +490,70 @@ body {
   }
   #npcChat {
     font-size: 0.6rem;
+  }
+}
+
+#glow-live {
+  font-size: 2rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  text-align: center;
+  color: snow;
+}
+
+/* TEXT GLOW */
+#glow-live span {
+  font-size: 2rem !important;
+  -webkit-animation: glow 2s ease-in-out both infinite;
+  animation: glow 2s ease-in-out both infinite;
+}
+#glow-live span:nth-child(1) {
+  -webkit-animation-delay: -0.2857142857s;
+  animation-delay: -0.2857142857s;
+}
+#glow-live span:nth-child(2) {
+  -webkit-animation-delay: -0.5714285714s;
+  animation-delay: -0.5714285714s;
+}
+#glow-live span:nth-child(3) {
+  -webkit-animation-delay: -0.8571428571s;
+  animation-delay: -0.8571428571s;
+}
+#glow-live span:nth-child(4) {
+  -webkit-animation-delay: -1.1428571429s;
+  animation-delay: -1.1428571429s;
+}
+
+@-webkit-keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px tomato,
+      -25px 25px 50px yellow, 25px 25px 50px tomato;
+  }
+  33% {
+    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px cyan,
+      -25px 25px 50px tomato, 25px 25px 50px cyan;
+  }
+  66% {
+    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px yellow,
+      -25px 25px 50px cyan, 25px 25px 50px yellow;
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px tomato,
+      -25px 25px 50px yellow, 25px 25px 50px tomato;
+  }
+  33% {
+    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px cyan,
+      -25px 25px 50px tomato, 25px 25px 50px cyan;
+  }
+  66% {
+    text-shadow: 0 0 8.3333333333px snow, 0 -25px 50px yellow,
+      -25px 25px 50px cyan, 25px 25px 50px yellow;
   }
 }
