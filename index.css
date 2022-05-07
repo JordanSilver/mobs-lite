@@ -155,8 +155,8 @@ body {
   align-items: center;
   z-index: 20;
   background-image: url('./img/overworld.png');
-  background-size: 300%;
-  background-position: 25% 60%;
+  background-size: 600% !important;
+  background-position: 20% 40% !important;
   background-repeat: no-repeat;
 }
 
