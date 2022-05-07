@@ -203,23 +203,22 @@ body {
   top: 2rem;
   display: flex;
   width: 100%;
-  justify-content: center;
+  height: 5rem;
+  justify-content: space-around;
   align-items: center;
-  gap: 1.5rem;
 }
 #audio-btn {
-  position: relative;
-  top: 2.5rem;
-  right: 1.5rem;
   color: black;
-  font-size: 3rem;
+  font-size: 2.5rem;
   height: 100%;
   cursor: pointer;
   display: flex;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+
   z-index: 30;
+  margin-top: 2rem;
   transform: translateY(0%);
 }
 
@@ -237,11 +236,8 @@ body {
   margin-bottom: 0.5rem;
 }
 #close-opts {
-  position: fixed;
-  top: 1rem;
-  right: 2rem;
   color: #000;
-  font-size: 2.5rem;
+  font-size: 2rem;
   cursor: pointer;
   z-index: 30;
 }
