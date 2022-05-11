@@ -55,7 +55,7 @@ const exitHouseZones = [];
 
 exitHouseMap.forEach((row, i) => {
   row.forEach((symbol, j) => {
-    if (symbol === 1) {
+    if (symbol === 1 || symbol === 404) {
       exitHouseZones.push(
         new Boundary({
           position: {

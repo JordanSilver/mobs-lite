@@ -18,23 +18,16 @@ let canvasScale = 1;
 let playerSpeed = 6;
 if (mobile) {
   canvas.height = window.innerHeight;
-  canvas.width = window.innerWidth / 0.9;
-
-  offset = {
-    x: -700,
-    y: -800,
-  };
+  canvas.width = window.innerWidth;
 } else {
   canvasScale = 1.1;
   canvas.width = 1024 * canvasScale;
   canvas.height = 576 * canvasScale;
-
-  offset = {
-    x: -450,
-    y: -900,
-  };
 }
-
+offset = {
+  x: -500,
+  y: -400,
+};
 // resize window event listener for canvas resize
 window.addEventListener('resize', () => {
   if (mobile) {
@@ -44,10 +37,7 @@ window.addEventListener('resize', () => {
     canvas.width = 1024 * canvasScale;
     canvas.height = 576 * canvasScale;
   }
-  offset = {
-    x: -450,
-    y: -900,
-  };
+
   draw();
 });
 
@@ -557,6 +547,8 @@ const optionsBtn = document.querySelector('#options-btn');
 const closeOpts = document.querySelector('#close-opts');
 const typeEffect = document.querySelector('#type-effect-loading');
 const startImg = document.querySelector('#start-hero');
+const introShowcase = document.querySelector('#intro-showcase');
+
 let clicked = false;
 
 window.addEventListener('click', () => {
@@ -604,6 +596,13 @@ optionsBtn.addEventListener('click', () => {
             opacity: 1,
             transform: 'translateY(0)',
             duration: 0.4,
+            onComplete() {
+              gsap.to(introShowcase, {
+                opacity: 1,
+                translateY: 0,
+                duration: 0.4,
+              });
+            },
           });
         },
       });
