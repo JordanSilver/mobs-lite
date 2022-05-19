@@ -548,6 +548,7 @@ const closeOpts = document.querySelector('#close-opts');
 const typeEffect = document.querySelector('#type-effect-loading');
 const startImg = document.querySelector('#start-hero');
 const introShowcase = document.querySelector('#intro-showcase');
+const swipeToMove = document.querySelector('.swipe-to-move');
 
 let clicked = false;
 
@@ -577,9 +578,26 @@ gsap.to(optionsBtn, {
   repeat: -1,
   ease: 'sine.inOut',
 });
+const swipeToMoveAni = () => {
+  let tl = gsap.timeline({
+    delay: 0.2,
+    paused: false, // default is false
+    repeat: -1, // number of repeats (-1 for infinite)
+    repeatRefresh: false, // invalidates on each repeat
+    yoyo: false, // if true > A-B-B-A, if false > A-B-A-B
+  });
+
+  tl.to(swipeToMove, { duration: 0.4, x: 0, y: -75 })
+    .to(swipeToMove, { duration: 0.4, x: 0, y: 0 })
+    .to(swipeToMove, { duration: 0.4, x: -75, y: 0 })
+    .to(swipeToMove, { duration: 0.4, x: 0, y: 0 })
+    .to(swipeToMove, { duration: 0.4, x: 0, y: 75 })
+    .to(swipeToMove, { duration: 0.4, x: 0, y: 0 })
+    .to(swipeToMove, { duration: 0.4, x: 75, y: 0 })
+    .to(swipeToMove, { duration: 0.4, x: 0, y: 0 });
+};
 
 optionsBtn.addEventListener('click', () => {
-  console.log('click');
   gsap.to(optionsBtn, {
     scale: 0.8,
     duration: 0.2,
@@ -601,6 +619,9 @@ optionsBtn.addEventListener('click', () => {
                 opacity: 1,
                 translateY: 0,
                 duration: 0.4,
+                onComplete() {
+                  swipeToMoveAni();
+                },
               });
             },
           });

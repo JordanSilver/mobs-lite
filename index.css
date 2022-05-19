@@ -241,6 +241,7 @@ body {
   cursor: pointer;
   z-index: 30;
 }
+
 #options-screen {
   position: absolute;
   top: 0;
@@ -273,6 +274,26 @@ body {
 
   opacity: 0;
   transform: translateY(500%);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.swipe-title {
+  position: absolute !important;
+  bottom: 1rem;
+}
+.swipe-to-move i {
+  font-size: 6rem;
+}
+#swipe-bullseye {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-55%, -70%);
+  font-size: 10rem;
+  opacity: 0.2;
 }
 
 #hud {
