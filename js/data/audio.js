@@ -1,4 +1,16 @@
 const audio = {
+  Title: new Howl({
+    src: './audio/groovy.wav',
+    volume: 0.05,
+    loop: true,
+    html5: true,
+  }),
+  Walking: new Howl({
+    src: './audio/Strolling.wav',
+    volume: 0.05,
+    loop: true,
+    html5: true,
+  }),
   Map: new Howl({
     src: './audio/map.wav',
     html5: true,

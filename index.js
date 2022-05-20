@@ -114,9 +114,6 @@ enterHouseMap.forEach((row, i) => {
   });
 });
 
-console.log(houseZones);
-// set player start to enter house zone[0]
-
 // DRAW BORDERS FOR COLLISIONS
 
 const collisionsMap = [];
@@ -292,7 +289,7 @@ function animate() {
         // DEACTIVATE CURRENT ANIMATION LOOP
         window.cancelAnimationFrame(animationID);
         document.querySelector('#game-btn').style.display = 'none';
-        audio.Map.stop();
+        audio.Walking.stop();
         if (!muted) {
           audio.initBattle.play();
           audio.battle.play();
@@ -351,7 +348,7 @@ function animate() {
         // DEACTIVATE CURRENT ANIMATION LOOP
         if (keys.w.pressed) {
           window.cancelAnimationFrame(animationID);
-          audio.Map.stop();
+          audio.Title.stop();
           if (!muted) audio.tackleHit.play();
           gsap.to('#transition', {
             opacity: 1,
@@ -408,7 +405,7 @@ function animate() {
         // DEACTIVATE CURRENT ANIMATION LOOP
         if (keys.w.pressed) {
           window.cancelAnimationFrame(animationID);
-          audio.Map.stop();
+          audio.Title.stop();
           if (!muted) audio.tackleHit.play();
           gsap.to('#transition', {
             opacity: 1,
@@ -549,12 +546,13 @@ const typeEffect = document.querySelector('#type-effect-loading');
 const startImg = document.querySelector('#start-hero');
 const introShowcase = document.querySelector('#intro-showcase');
 const swipeToMove = document.querySelector('.swipe-to-move');
+const introHero = document.querySelector('#intro-hero');
 
 let clicked = false;
 
 window.addEventListener('click', () => {
   if (!clicked) {
-    audio.Map.play();
+    audio.Title.play();
 
     gsap.to(startImg, {
       opacity: 1,
@@ -578,15 +576,16 @@ gsap.to(optionsBtn, {
   repeat: -1,
   ease: 'sine.inOut',
 });
-const swipeToMoveAni = () => {
-  let tl = gsap.timeline({
-    delay: 0.2,
-    paused: false, // default is false
-    repeat: -1, // number of repeats (-1 for infinite)
-    repeatRefresh: false, // invalidates on each repeat
-    yoyo: false, // if true > A-B-B-A, if false > A-B-A-B
-  });
 
+let tl = gsap.timeline({
+  delay: 0.5,
+  paused: false, // default is false
+  repeat: -1, // number of repeats (-1 for infinite)
+  repeatRefresh: false, // invalidates on each repeat
+  yoyo: false, // if true > A-B-B-A, if false > A-B-A-B
+});
+
+const swipeToMoveAni = () => {
   tl.to(swipeToMove, { duration: 0.4, x: 0, y: -75 })
     .to(swipeToMove, { duration: 0.4, x: 0, y: 0 })
     .to(swipeToMove, { duration: 0.4, x: -75, y: 0 })
@@ -617,7 +616,7 @@ optionsBtn.addEventListener('click', () => {
             onComplete() {
               gsap.to(introShowcase, {
                 opacity: 1,
-                translateY: 0,
+                translateY: 200,
                 duration: 0.4,
                 onComplete() {
                   swipeToMoveAni();
@@ -660,7 +659,7 @@ audioBtn.addEventListener('click', () => {
   // disable audio if audio button
   muted = !muted;
   if (muted) {
-    audio.Map.stop();
+    audio.Title.stop();
     audioBtn.classList.remove('bi-speaker');
     audioBtn.classList.add('bi-speaker-fill');
     gsap.to(audioBtn, {
@@ -674,7 +673,7 @@ audioBtn.addEventListener('click', () => {
       },
     });
   } else {
-    audio.Map.play();
+    audio.Title.play();
     audioBtn.classList.remove('bi-speaker-fill');
     audioBtn.classList.add('bi-speaker');
     gsap.to(audioBtn, {
@@ -689,6 +688,20 @@ audioBtn.addEventListener('click', () => {
     });
   }
 });
+
+introShowcase.addEventListener('click', () => {
+  gsap.to(introShowcase, {
+    opacity: 0,
+    translateY: -100,
+    duration: 0.4,
+  });
+  gsap.to(optionsScreen, {
+    opacity: 0,
+    transform: 'translateY(-100%)',
+    duration: 0.4,
+  });
+});
+
 // typewriter effect for typeEffect
 const typeEffectText = typeEffect.innerHTML;
 let typeEffectIndex = 0;

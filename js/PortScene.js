@@ -543,7 +543,7 @@ function animatePort() {
           window.cancelAnimationFrame(portAniID);
           if (!muted) {
             audio.tackleHit.play();
-            audio.Map.play();
+            audio.Walking.play();
           }
           gsap.to('#transition', {
             opacity: 1,
@@ -557,8 +557,9 @@ function animatePort() {
                 onComplete() {
                   // ACTIVE NEW ANIMATION LOOP
                   port = false;
-                  audio.House.stop();
+
                   animate();
+
                   gsap.to('#transition', {
                     opacity: 0,
                     duration: 0.4,

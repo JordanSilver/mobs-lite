@@ -279,12 +279,38 @@ body {
   justify-content: center;
   align-items: center;
 }
+#intro-hero {
+  position: relative;
+  width: 90%;
+  height: 60%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  border-radius: 4px;
+
+  opacity: 0;
+  transform: translateY(700%);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+#showcaseCarousel {
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+}
 
 .swipe-title {
   position: absolute !important;
   bottom: 1rem;
 }
 .swipe-to-move i {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-55%, -50%);
+
   font-size: 6rem;
 }
 #swipe-bullseye {
